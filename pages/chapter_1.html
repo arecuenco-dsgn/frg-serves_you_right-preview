@@ -54,6 +54,16 @@
 
   <!-- loading layer -->
   <div class="loading"  style="opacity: 0;"></div>
+  
+  <section id="notes_box">
+    <article class="notes_close note_01_text" style="display: none;">
+      <i class="note_title italic">“Grítenme piedras del campo,”</i>
+      <p>(Call to me stones of the field) is a popular Mexican ranchera originally written and recorded by Cuco Sánchez in 1956. Speak to me hills and valleys / Call to me stones of the field / When have you seen someone love as I’m loving? / When have you seen someone cry as I’m crying / Die as I’m dying.</p>
+      <a href="#" onclick="showNote(this.className)" class="note_01">close</a>
+    </article>
+
+    <div id="notes_bg" class="notes_close" style="display: none;" onclick="closeNote()"></div>
+  </section>     
 
   <main id="grid_interiores">
     <section class="grid_items grid_item_01"></section>
@@ -112,7 +122,7 @@
           <p class="paragraph" lang="en-GB">Enzo could not believe her childishness. What is the etiquette for a situation like this? She had been taught not to put her elbows on the dinner table, to say please, excuse me, and thank you, but they hadn’t told her what to say to the guy who pops your cherry and wants you to wake up next to him on his mattress on the floor. She felt an urgent need to get to her room, put on her pajamas and go to bed, praying that the headmistress would not be waiting for her, and that Ximena would be asleep. The shower would have to wait. Enzo called her a cab. </p>
           <p class="dialog" lang="en-GB">“Ciao,” he said, standing at the door naked. He gave her a minuscule peck on the lips. </p>
           <p class="dialog" lang="en-GB">“Thanks for everything,” she said.</p>
-          <p class="paragraph" lang="en-GB">She pressed her forehead to the icy cab window and watched the town go by. She felt like everything around her was more intense. The fog of dawn. The chemical breath of the car’s heating system. The driver’s abetting silence. She would have liked to shout her news to the four winds and wake up the entire town: “I have passed the trial by fire. I am not the same as before. <i class="italic">Grítenme, piedras del campo”</i>.</p>
+          <p class="paragraph" lang="en-GB">She pressed her forehead to the icy cab window and watched the town go by. She felt like everything around her was more intense. The fog of dawn. The chemical breath of the car’s heating system. The driver’s abetting silence. She would have liked to shout her news to the four winds and wake up the entire town: “I have passed the trial by fire. I am not the same as before. <a href="#" onclick="showNote(this.className)" class="note_01"><i class="italic">Grítenme, piedras del campo”</i></a>.</p>
           <p class="paragraph" lang="en-GB">She got out of the cab distracted but alert at the same time. The porter, a mustachioed and temperamental Turk, eyed her suspiciously. The school’s administration had decided that it was preferable for the girls to come in and out the main door instead of sneaking out of the windows after hours and breaking their ankles and shoulders.  When she arrived at the gate, Lucía’s fist unfurled revealing 10 Swiss Francs. The porter let her in. </p>
           <p class="paragraph" lang="en-GB">She put on her long flannel nightie in the dark, hid the incriminating panties under the mattress, and got into bed. </p>
           <p class="dialog" lang="en-GB">“Where were you? What happened?” Ximena whispered.</p>
@@ -127,7 +137,7 @@
     
     <section class="grid_items grid_item_07"></section>
     <section class="grid_items grid_item_08" id="item_botones">
-      <a id="back" href="./chapters.html">Content</a>
+      <a id="back" href="./chapters.html">Contents</a>
       <div class="nav_btns">
         <button id="prev"> <<< </button>
         <button id="next"> >>> </button>
@@ -136,6 +146,8 @@
     <section class="grid_items grid_item_09">
     </section>
   </main>
+
+
 
   <script type="text/javascript" src="../js/swiped-events.js"></script>
   <script type="text/javascript" src="../js/main.js"></script>
