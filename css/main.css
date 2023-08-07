@@ -119,6 +119,7 @@ h1 strong {
 }
 
 #inner p a {
+    z-index: 1000;
     display: inline;
     top: -2px;
     font-weight: 400;
@@ -134,7 +135,16 @@ h1 strong {
     background: var(--white);
     border: #cecece 1px solid;
     padding: 12px 16px;
+}z
+#notes_box article .paragraph {
+    padding-right: 0px;
+    margin-top: 8px;
+    margin-bottom: 0px;
 }
+#notes_box article a {
+    text-decoration: none;
+}
+    
 #notes_box #notes_bg {
     position: fixed;
     top: 0px;
@@ -147,17 +157,10 @@ h1 strong {
     width: 100vw;
     height: 100vh;
 }
-#notes_box article .note_title {
-    font-weight: 700;
-}
-#notes_box article p {
-    margin-top: 8px;
-    margin-bottom: 0px;
-}
 
 .dialog {
     max-width: calc(var(--text-width) - var(--dialog-left_padd));
-    margin: 8px 0 8px 56px
+    margin: .5em 0 .5em 3em;
 }
 
 .definition {
@@ -1311,6 +1314,27 @@ h1 strong {
         position: fixed;
         top: var(--cap-mt)
     }
+
+    #notes_box article {
+        box-sizing: border-box;
+        position: fixed;
+        z-index: 100;
+        width: calc( 100vw - 48px );
+        top: 30%;
+        left: 0px;
+        border: #cecece 1px solid;
+        padding: 16px 20px;
+        margin: auto 24px;
+    }
+    #notes_box #notes_bg {
+        opacity: .8;
+        background-color: var(--black);
+    }
+    #inner p a {
+        font-size: 16px;
+        line-height: 22px;
+    }
+
     .credits_main #item_paginas {
         height: calc(var(--app-height) - var(--cap-mt) - var(--cap-mb) - 32px);
     }
@@ -1332,7 +1356,7 @@ h1 strong {
     .grid_item_08 #back {
         position: fixed;
         bottom: 16px;
-        left: 22px;
+        left: 28px;
         width: 64px;
     }
 
@@ -1369,19 +1393,22 @@ h1 strong {
         margin: 0 0 12px 0;
         letter-spacing: -.5px
     }
+    h1 strong {
+        padding-right: .5em;
+    }
+
 
     .definition, .dialog,.paragraph {
         font-size: 16px;
         line-height: 22px;
-        margin: 0
     }
 
     .dialog {
-        padding: 0 24px 0 24px
+        padding: 0 24px 0 0px
     }
 
     .paragraph {
-        padding: 0 24px 12px 0
+        padding: 0 24px 0 0
     }
 
     #content {
