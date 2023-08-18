@@ -126,16 +126,21 @@ h1 strong {
     font-size: 19px;
     line-height: 1.5em;
 }
+
 #notes_box article {
-    position: absolute;
-    z-index: 100;
-    width: 240px;
-    top: calc(12vh + 80px + 20px + 1em);
-    left: calc(10vw + var(--text-width) + 20px + 20px);
+    box-sizing: border-box;
+    position: fixed;
+    z-index: 1500;
+    width: calc( 100vw - 48px );
+    top: 30%;
     background: var(--white);
     border: #cecece 1px solid;
-    padding: 12px 16px;
-}z
+    padding: 16px 20px;
+    margin: auto 24px;
+    
+    max-width: 640px;
+    left: calc((100vw - var(--ancho-pagina))/2 );
+}
 #notes_box article .paragraph {
     padding-right: 0px;
     margin-top: 8px;
@@ -149,11 +154,11 @@ h1 strong {
     position: fixed;
     top: 0px;
     left: 0px;
-    z-index: 50;
+    z-index: 1050;
     content: " ";
     display: block;
-    background-color: var(--grey-01);
-    opacity: .05;
+    opacity: .8;
+    background-color: var(--black);
     width: 100vw;
     height: 100vh;
 }
@@ -1316,20 +1321,9 @@ h1 strong {
     }
 
     #notes_box article {
-        box-sizing: border-box;
-        position: fixed;
-        z-index: 100;
-        width: calc( 100vw - 48px );
-        top: 30%;
         left: 0px;
-        border: #cecece 1px solid;
-        padding: 16px 20px;
-        margin: auto 24px;
     }
-    #notes_box #notes_bg {
-        opacity: .8;
-        background-color: var(--black);
-    }
+
     #inner p a {
         font-size: 16px;
         line-height: 22px;
