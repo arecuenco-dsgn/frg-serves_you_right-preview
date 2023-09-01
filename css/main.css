@@ -1436,10 +1436,9 @@ h1 strong {
         width: auto;
         height: 24px;
         padding-top: 0;
-        bottom: 12px;
+        bottom: 32px;
         background: 0 0;
         border: none;
-        opacity: .4;
         top: auto
     }
 }
