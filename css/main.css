@@ -246,10 +246,10 @@ h1 strong {
 
 .cover .box {
     display: flex;
-    width: 75vh;
-    height: 75vh;
+    width: calc(90vh / 1.40752);
+    height: 95vh;
     position: fixed;
-    top: 14vh;
+    top: 0;
     margin: 0;
     justify-content: center;
     align-items: center
@@ -260,7 +260,7 @@ h1 strong {
     z-index: 100;
     transition: var(--hover-transition-start);
     width: auto;
-    height: 100%
+    height: 80vh;
 }
 
 .cover .cover_img {
@@ -271,14 +271,14 @@ h1 strong {
 }
 
 .cover .cover_shadow {
-    width: calc(100% / 1.41);
-    height: 100%;
+    width: calc(80vh / 1.40752);
+    height: 80vh;
     border: solid 4px var(--black-deep);
     background-color: var(--black-deep);
     box-sizing: border-box;
     position: absolute;
-    top: 0;
-    margin: 0 14.5%;
+    top: 7.5vh;
+    margin: 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -1427,8 +1427,19 @@ h1 strong {
     }
 
     .cover .box {
-        top: 12vh;
-        height: 70vh
+        top: 0;
+        width: 100vw;
+        height: 95vh;
+    }
+
+    .cover .cover_link {
+        width: 85%;
+        height: auto;
+    }
+
+    .cover .cover_img {
+        width: 100%;
+        height: auto;
     }
 
     .cover .cover_shadow {
