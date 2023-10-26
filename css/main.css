@@ -826,7 +826,7 @@ h1 strong {
 #infopage {
     display: block;
     justify-content: right;
-    margin-top: 97px;
+    margin-top: 96px;
     line-height: 32px
 }
 
@@ -1099,7 +1099,8 @@ h1 strong {
 
     #grid_interiores {
         grid-template-rows: 64px auto 96px;
-        grid-template-columns: 8vw var(--ancho-pagina) auto
+        grid-template-columns: 8vw var(--ancho-pagina) auto;
+        grid-gap: 12px;
     }
 
     #index_flex .index_row {
@@ -1162,9 +1163,23 @@ h1 strong {
     .bg-noise_right_2 {
         background-size: 320px
     }
+
+    #infopage {
+        margin-top: 143px;
+    }
+
+    #infopage span {
+        padding: 0 2px;
+    }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 760px) {
+    :root {
+        --ancho-pagina:520px
+    }
+}
+
+@media (max-width: 599px) {
     :root {
         --ancho-pagina:88vw;
         --gap: 24px;
@@ -1357,13 +1372,13 @@ h1 strong {
     .grid_item_08 #prev {
         position: fixed;
         bottom: 16px;
-        right: 80px
+        right: 10vw;
     }
 
     .grid_item_08 #next {
         position: fixed;
         bottom: 16px;
-        right: 24px
+        right: 20vw;
     }
 
     .bg-noise_right,.bg-noise_right_2 {
