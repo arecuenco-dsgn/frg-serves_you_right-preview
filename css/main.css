@@ -869,6 +869,14 @@ h1 strong {
     color: var(--black)
 }
 
+#inner section {
+    padding-bottom: 3em;
+}
+
+#inner h1 {
+    break-before: column;
+}
+
 .loading {
     position: fixed;
     z-index: -5000;
