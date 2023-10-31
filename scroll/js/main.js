@@ -73,7 +73,27 @@ function scrollPages(min, max) {
 
 scroller.addEventListener("scrollend", (event) => {
     scrollPages()
-});    
+});
+
+function showIndex() {
+  console.log("- - - - - - - -> showIndex");
+  setTimeout(() => {
+    var x = document.getElementById("index");
+    if (x.style.display === "none") {
+      console.log("show it");
+      x.style.display = "block";
+      setTimeout(() => {
+        document.getElementById("index").style.opacity = "1";
+      }, 1000);
+    } else {
+      console.log("hide it");
+      document.getElementById("index").style.opacity = "0";
+      setTimeout(() => {
+        x.style.display = "none";
+      }, 1000);
+    }
+  }, 1000)
+}
 
 var innerStart = Math.ceil(Math.abs(document.getElementById("inner").getBoundingClientRect().left));
 
