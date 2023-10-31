@@ -42,13 +42,41 @@ var lastPage,
     innerPages,
     pageTot,
     pageCur,
-    pagina = $("#item_paginas"),
+    pagina = $("#content"),
     pgwidth = pagina.width(),
     gap = parseInt(get_gap),
-    areaWidth = Math.floor(pgwidth),
+    areaWidth = Math.round(pgwidth),
     columnWidth = pgwidth - gap,
     animDuration = 400,
-    contentPos = null;
+    contentPos = document.getElementById("content").scrollLeft;
+
+const scroller = document.getElementById("content");  
+const output = document.getElementById("output");
+
+function scrollPages(min, max) {
+    contentPos = document.getElementById("content").scrollLeft;
+
+    console.log("calcPage ------------------");
+    pageCalc = contentPos / areaWidth;
+    console.log("pageCalc: " + pageCalc);
+    
+    
+    const MIN = min ?? 1;
+    const MAX = max ?? pageTot;
+    roundingCalc = Math.ceil(pageCalc);
+    parsed = parseInt(roundingCalc);
+    pageCur = Math.min(Math.max(parsed, MIN), MAX);
+    
+    console.log("pageCur: " + pageCur);
+    renderInfoPage();
+}
+
+scroller.addEventListener("scrollend", (event) => {
+    scrollPages()
+});    
+
+
+
 function positionZoom() {
     (elmSpan = $("#inner").append("<span></span>")),
     (posSpan = Math.floor( $("#inner").find("span:last-of-type").position().left )),
@@ -57,7 +85,8 @@ function positionZoom() {
 }
 
 
-console.log("cntWidth: " + cntWidth),
+
+console.log("contentPos: " + contentPos),
 console.log("areaWidth: " + areaWidth),
 console.log("pageTot 1: " + pageTot),
 console.log("gap: " + gap);
@@ -75,17 +104,22 @@ function hasContentAnimateQueue() {
 
 /* (pageCur < pageTot) */
 function next() {
+  
     if (!hasContentAnimateQueue()) {
-        if (pageCur >= 1) { 
+        if (pageCur >= 1) {
+            var t = document.getElementById("content").scrollLeft = areaWidth * pageCur; 
             var e = $("#content");
-                console.log("contentPos: " + contentPos);
+                console.log("NEXT - - - -");
+                /*
                 t = contentPos - areaWidth - gap;
                 (contentPos = t),
                 e.animate({ left: t + "px" }, animDuration),
+                */
                 pageCur++,
                 renderInfoPage();
                 console.log("t: " + t);
-        }   else if (pageCur = pageTot) {
+                console.log("pageCur: " + pageCur);
+        } else if (pageCur = pageTot) {
             var e = $("#content");
                 e.animate({ left: 0 + "px" }, animDuration),
                 pageCur = 1,
@@ -96,19 +130,26 @@ function next() {
 function prev() {
     if (!hasContentAnimateQueue()) {
         if (pageCur > 1) { 
+        var t = document.getElementById("content").scrollLeft = (areaWidth * (pageCur - 2)); 
         var e = $("#content");
-            console.log("contentPos: " + contentPos);
+            console.log("PREV - - - -");
+            /*
             t = contentPos + pgwidth + gap;
             (contentPos = t),
             e.animate({ left: t + "px" }, animDuration),
+            */
             pageCur--,
             renderInfoPage();
             console.log("t: " + t);
+            console.log("pageCur: " + pageCur);
         } else if (pageCur = 1) {
+            var t = document.getElementById("content").scrollLeft += a; 
             var e = $("#content");
+                /*
                 t = -(cntWidth - pgwidth);
                 (contentPos = t),
                 e.animate({ left: t + "px" }, animDuration),
+                */
                 pageCur = pageTot,
                 renderInfoPage();
                 console.log("t: " + t);
@@ -127,6 +168,11 @@ function start() {
     var a = Math.floor($("#inner").find("span:last-of-type").position().left);
     console.log("a: " + a);
     
+    var scroller = document.getElementById("content");  
+    var output = document.getElementById("output");
+
+    output.textContent = `scrollTop: ${scroller.scrollleft}`;
+
     innerPages = Math.floor( $("#inner").width() );
     console.log("innerPages: " + innerPages);
 

@@ -997,18 +997,40 @@ h1 strong {
     top: 0;
     left: 0;
     width: var(--ancho-pagina);
-    height: 100%
+    height: 100%;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: mandatory;
+    scroll-snap-type: x mandatory;
+    scrollbar-color: var(--black) var(--white-soft);
 }
 
 #inner {
-    column-count: 2;
-    column-gap: 0;
-    column-width: var(--ancho-pagina);
-    -webkit-column-count: 2;
-    -webkit-column-gap: 0px;
-    -webkit-column-width: var(--ancho-pagina);
     height: 96%;
     position: relative;
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+}
+
+#inner article {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    min-width: fit-content;
+    padding-right: 24px;
+}
+
+#inner article h1{
+    padding-right: 48px;
+}
+#inner article .paragraph {
+    padding-right: calc(var(--ancho-pagina) - var(--text-width));
+}
+
+#inner article .paragraph, #inner article h1 {
+    width: var(--ancho-pagina);
+    scroll-snap-align: start;
 }
 
 #inner * {
