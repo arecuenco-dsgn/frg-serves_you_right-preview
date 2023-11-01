@@ -21,7 +21,7 @@ function closeNote() {
 }
 
 function resize() {
-  positionZoom(), renderInfoPage();
+  positionZoom(), renderInfoPage(), start();
 }
 window.onresize = resize;
 const appHeight = () => {
@@ -56,14 +56,15 @@ const output = document.getElementById("output");
 function scrollPages(min, max) {
     contentPos = document.getElementById("content").scrollLeft;
 
-    console.log("calcPage ------------------");
-    pageCalc = contentPos / areaWidth;
+    console.log(" - - - - - - - - SCROLL");
+    pageCalc = (contentPos / areaWidth) + 1;
+    console.log("contentPos: " + contentPos);
     console.log("pageCalc: " + pageCalc);
     
     
     const MIN = min ?? 1;
     const MAX = max ?? pageTot;
-    roundingCalc = Math.ceil(pageCalc);
+    roundingCalc = Math.floor(pageCalc);
     parsed = parseInt(roundingCalc);
     pageCur = Math.min(Math.max(parsed, MIN), MAX);
     
@@ -97,6 +98,7 @@ function showIndex() {
 
 var innerStart = Math.ceil(Math.abs(document.getElementById("inner").getBoundingClientRect().left));
 
+
 var chapter_1 = 0;
 var chapter_2 = Math.ceil(Math.abs(document.getElementById("chapter_2").getBoundingClientRect().left));
 var chapter_3 = Math.ceil(Math.abs(document.getElementById("chapter_3").getBoundingClientRect().left));
@@ -121,7 +123,7 @@ var chapter_21 = Math.ceil(Math.abs(document.getElementById("chapter_21").getBou
 var chapter_22 = Math.ceil(Math.abs(document.getElementById("chapter_22").getBoundingClientRect().left)) + (innerStart * 3);
 var chapter_23 = Math.ceil(Math.abs(document.getElementById("chapter_23").getBoundingClientRect().left)) + (innerStart * 3);
 
-
+/*
 console.log("chapter_1: " + chapter_1);
 console.log("chapter_2: " + chapter_2);
 console.log("chapter_3: " + chapter_3);
@@ -145,6 +147,7 @@ console.log("chapter_20: " + chapter_20);
 console.log("chapter_21: " + chapter_21);
 console.log("chapter_22: " + chapter_22);
 console.log("chapter_23: " + chapter_23);
+*/
 
 function scrollChapter_1(obj) { anchorNav = document.getElementById("content").scrollLeft = chapter_1; }
 function scrollChapter_2(obj) { anchorNav = document.getElementById("content").scrollLeft = chapter_2; }
@@ -171,37 +174,11 @@ function scrollChapter_22(obj) { anchorNav = document.getElementById("content").
 function scrollChapter_23(obj) { anchorNav = document.getElementById("content").scrollLeft = chapter_23; }
 
 
-function scrollChapter(obj) {
-    console.log("- - - - - - - - - - - - - - - - - - - -");
-
-    e = obj.getAttribute("data-href");
-    href = e.substring(1);
-    
-    innerPos = Math.abs(document.getElementById("inner").getBoundingClientRect().left);
-    chapterPos = Math.abs(document.getElementById(href).getBoundingClientRect().left);
-    finalScroll = chapterPos + innerPos ;
-    positionCalc = pageCur * areaWidth;
-
-    /*
-    if (innerPos >= 0) {
-      console.log("CHAPTER NAV 1 - - - -");
-      anchorNav = document.getElementById("content").scrollLeft = finalScroll;
-      console.log("anchorNav: " + anchorNav);
-
-    } else if (innerPos <= 0) {
-      console.log("CHAPTER NAV 2 - - - -");
-      anchorNav = document.getElementById("content").scrollLeft = Math.abs(innerPos) + chapterPos;
-      console.log("anchorNav: " + anchorNav);
-    }
-    */
-}
-
-
 function positionZoom() {
     (elmSpan = $("#inner").append("<span></span>")),
     (posSpan = Math.floor( $("#inner").find("span:last-of-type").position().left )),
     (cntWidth = posSpan + (areaWidth + gap)),
-    (pageTot = Math.ceil(cntWidth / (areaWidth + gap)));
+    (pageTot = pageTot_SUM);
 }
 
 
@@ -209,7 +186,7 @@ function getPositionDom() {
   $("#content").offset(), parseInt($("#content").css("left"), 10);
 }
 function renderInfoPage() {
-  $("#infopage").html(pageCur + "  <span>/</span>  " + pageTot);
+  $("#infopage").html(pageCur + "  <span>/</span>  " + pageTot_SUM);
 }
 function hasContentAnimateQueue() {
   return 0 !== $("#content").queue().length;
@@ -217,69 +194,109 @@ function hasContentAnimateQueue() {
 
 /* (pageCur < pageTot) */
 function next() {
-  
     if (!hasContentAnimateQueue()) {
-        if (pageCur >= 1) {
+        if (pageCur >= 1 && pageCur < pageTot_SUM ) {
             var t = document.getElementById("content").scrollLeft = areaWidth * pageCur; 
             var e = $("#content");
-                console.log("NEXT - - - -");
-                /*
-                t = contentPos - areaWidth - gap;
-                (contentPos = t),
-                e.animate({ left: t + "px" }, animDuration),
-                */
+                console.log(" - - - - - - - - NEXT - IF");
                 pageCur++,
                 renderInfoPage();
                 console.log("t: " + t);
                 console.log("pageCur: " + pageCur);
-        } else if (pageCur = pageTot) {
-            var e = $("#content");
-                e.animate({ left: 0 + "px" }, animDuration),
-                pageCur = 1,
-                renderInfoPage();
+        } else if (pageCur = pageTot_SUM) {
+            console.log(" - - - - - - - - NEXT - ELSE IF");    
+            var t = document.getElementById("content").scrollLeft = 0;
         }
     }
 }
 function prev() {
     if (!hasContentAnimateQueue()) {
         if (pageCur > 1) { 
-        var t = document.getElementById("content").scrollLeft = (areaWidth * (pageCur - 2)); 
-        var e = $("#content");
-            console.log("PREV - - - -");
-            /*
-            t = contentPos + pgwidth + gap;
-            (contentPos = t),
-            e.animate({ left: t + "px" }, animDuration),
-            */
-            pageCur--,
-            renderInfoPage();
-            console.log("t: " + t);
-            console.log("pageCur: " + pageCur);
-        } else if (pageCur = 1) {
-            var t = document.getElementById("content").scrollLeft += a; 
+            var t = document.getElementById("content").scrollLeft = (areaWidth * (pageCur - 1.9)); 
             var e = $("#content");
-                /*
-                t = -(cntWidth - pgwidth);
-                (contentPos = t),
-                e.animate({ left: t + "px" }, animDuration),
-                */
-                pageCur = pageTot,
+                console.log(" - - - - - - - - PREV - IF");
+                pageCur--,
                 renderInfoPage();
                 console.log("t: " + t);
+                console.log("pageCur: " + pageCur);
+        } else if (pageCur = 1) {
+            console.log(" - - - - - - - - PREV - ELSE IF");
+            var t = document.getElementById("content").scrollLeft = areaWidth * pageTot_SUM; 
         }
     } 
 }
+
+
+
 function start() {
+  setTimeout(() => {
+    console.log(" - - - - - - - - START");
     var e = document.getElementById("prev"); e.addEventListener("click", prev),
         (e = document.getElementById("next")).addEventListener("click", next);
     
     var t = document.getElementById("inner"); 
         t.addEventListener("swiped-left", prev),
         t.addEventListener("swiped-right", prev);
-        $("#inner").append("<span></span>");
+        $("#inner").append("<span style='width: 800px;'>Hello</span>");
     
-    var a = Math.floor($("#inner").find("span:last-of-type").position().left);
+
+    var width_1 = Math.abs(document.getElementById("width_1").getBoundingClientRect().width);
+    console.log("width_1: " + width_1);
+    var width_X = Math.abs(document.getElementById("width_X").getBoundingClientRect().width);
+    console.log("width_X: " + width_X);
+    var width_3 = Math.abs(document.getElementById("width_3").getBoundingClientRect().width);
+    console.log("width_3: " + width_3);
+    var width_4 = Math.abs(document.getElementById("width_4").getBoundingClientRect().width);
+    console.log("width_4: " + width_4);
+    var width_5 = Math.abs(document.getElementById("width_5").getBoundingClientRect().width);
+    console.log("width_5: " + width_5);
+    var width_6 = Math.abs(document.getElementById("width_6").getBoundingClientRect().width);
+    console.log("width_6: " + width_6);
+    var width_7 = Math.abs(document.getElementById("width_7").getBoundingClientRect().width);
+    console.log("width_7: " + width_7);
+    var width_8 = Math.abs(document.getElementById("width_8").getBoundingClientRect().width);
+    console.log("width_8: " + width_8);
+    var width_9 = Math.abs(document.getElementById("width_9").getBoundingClientRect().width);
+    console.log("width_9: " + width_9);
+    var width_10 = Math.abs(document.getElementById("width_10").getBoundingClientRect().width);
+    console.log("width_10: " + width_10);
+    var width_11 = Math.abs(document.getElementById("width_11").getBoundingClientRect().width);
+    console.log("width_11: " + width_11);
+    var width_12 = Math.abs(document.getElementById("width_12").getBoundingClientRect().width);
+    console.log("width_12: " + width_12);
+    var width_13 = Math.abs(document.getElementById("width_13").getBoundingClientRect().width);
+    console.log("width_13: " + width_13);
+    var width_14 = Math.abs(document.getElementById("width_14").getBoundingClientRect().width);
+    console.log("width_14: " + width_14);
+    var width_15 = Math.abs(document.getElementById("width_15").getBoundingClientRect().width);
+    console.log("width_15: " + width_15);
+    var width_16 = Math.abs(document.getElementById("width_16").getBoundingClientRect().width);
+    console.log("width_16: " + width_16);
+    var width_17 = Math.abs(document.getElementById("width_17").getBoundingClientRect().width);
+    console.log("width_17: " + width_17);
+    var width_18 = Math.abs(document.getElementById("width_18").getBoundingClientRect().width);
+    console.log("width_18: " + width_18);
+    var width_19 = Math.abs(document.getElementById("width_19").getBoundingClientRect().width);
+    console.log("width_19: " + width_19);
+    var width_20 = Math.abs(document.getElementById("width_20").getBoundingClientRect().width);
+    console.log("width_20: " + width_20);
+    var width_21 = Math.abs(document.getElementById("width_21").getBoundingClientRect().width);
+    console.log("width_21: " + width_21);
+    var width_22 = Math.abs(document.getElementById("width_22").getBoundingClientRect().width);
+    console.log("width_22: " + width_22);
+    var width_23 = Math.abs(document.getElementById("width_23").getBoundingClientRect().width);
+    console.log("width_23: " + width_23);
+
+    var chaptersSUM = width_1 + width_X + width_3 + width_4 + width_5 + width_6 + width_7 + width_8 + width_9 + width_10 + width_11 + width_12 + width_13 + width_14 + width_15 + width_16 + width_17 + width_18 + width_19 + width_20 + width_21 + width_22 + width_23;
+
+    console.log(" - - - - - - - - * - - - - - - - - ");
+
+    console.log("Chapters SUM: " + chaptersSUM);
+
+    pageTot_SUM =  Math.floor( (chaptersSUM / pgwidth)  )
+    console.log("Pages by SUM: " + pageTot_SUM);
     
+
     var scroller = document.getElementById("content");  
     var output = document.getElementById("output");
 
@@ -287,39 +304,20 @@ function start() {
 
     innerPages = Math.floor( $("#inner").width() );
 
-    
-
-    
-    /* if (    ((a += columnWidth),
-            (pos = parseInt($("#inner").css("-webkit-column-gap"), 10)),
-            (a -= gap),
-            (pageTot =  (cntWidth = a) / (areaWidth + gap) <= 1
-                        ? 1
-                        : Math.ceil(cntWidth / (areaWidth + gap))),
-
-                        console.log("pageTot 2: " + pageTot)
-
-            )
-                
-        
-        )
-
-        console.log("pageTot 3: " + pageTot),
-        console.log("gap: " + gap), */
         pageCur = 1;
-        pageTot =  Math.ceil( (cntWidth = a) / (areaWidth + gap) - 1 )
-        /* else {  var n = $("#content");
-                (ajustPages = pageTot - 1),
-                (lastPage = -pgwidth * ajustPages - gap * ajustPages),
-                n.css({ left: lastPage + "px" }),
-                (newPos = lastPage),
-                (pageCur = 1);
-                console.log("lastPage: " + lastPage);
-                console.log("ajustPages: " + ajustPages);
-                console.log("newPos: " + newPos);
-                console.log("pageCur: " + pageCur);
-        } */
-    getPositionDom(), renderInfoPage();
+        pageTot =  pageTot_SUM;
+        console.log("pageTot: " + pageTot);
+
+        pagina = $("#content"),
+        pgwidth = pagina.width(),
+        areaWidth = pgwidth,
+
+        console.log("pgwidth: " + pgwidth);
+        console.log("areaWidth: " + areaWidth);
+
+    getPositionDom(), renderInfoPage(), scrollPages();
+  }, 1000)
 }
-start();
+
+window.addEventListener("load",  start() );
 

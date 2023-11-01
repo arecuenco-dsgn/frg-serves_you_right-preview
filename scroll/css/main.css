@@ -165,7 +165,7 @@ h1 strong {
 
 .dialog {
     max-width: calc(var(--text-width) - var(--dialog-left_padd));
-    margin: .5em 0 .5em 3em;
+    margin: .5em 0 .5em 0;
 }
 
 .definition {
@@ -1007,7 +1007,6 @@ h1 strong {
     height: 100%;
     overflow-x: auto;
     scroll-behavior: smooth;
-    scroll-snap-type: mandatory;
     scroll-snap-type: x mandatory;
     scrollbar-color: var(--black) var(--white-soft);
 }
@@ -1024,18 +1023,32 @@ h1 strong {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    min-width: fit-content;
-    padding-right: 24px;
+    width: max-content;
+    min-width: max-content;
 }
 
+/*
+#inner article:nth-child(odd) {
+    background-color: coral;
+}
+#inner article:nth-child(even) {
+    background-color: cornflowerblue;
+} */
+
 #inner article h1{
+    width: calc(var(--ancho-pagina) - 48px);
+    scroll-snap-align: start;
     padding-right: 48px;
 }
 #inner article .paragraph {
     padding-right: calc(var(--ancho-pagina) - var(--text-width));
 }
+#inner article .dialog {
+    padding-right: calc(var(--ancho-pagina) - var(--text-width));
+    padding-left: 56px;
+}
 
-#inner article .paragraph, #inner article h1 {
+#inner article .dialog, #inner article .paragraph, #inner article span {
     width: var(--ancho-pagina);
     scroll-snap-align: start;
 }
@@ -1218,10 +1231,15 @@ h1 strong {
 
 @media (max-width: 599px) {
     :root {
-        --ancho-pagina:88vw;
-        --gap: 24px;
+        --ancho-pagina:480px;
+        --gap: 0px;
         --cap-mt: 56px;
-        --cap-mb: 64px
+        --cap-mb: 96px;
+    }
+
+    #inner * {
+        position: relative;
+        box-sizing: border-box;
     }
 
     body {
@@ -1409,13 +1427,13 @@ h1 strong {
     .grid_item_08 #prev {
         position: fixed;
         bottom: 16px;
-        right: 10vw;
+        right: 20vw;
     }
 
     .grid_item_08 #next {
         position: fixed;
         bottom: 16px;
-        right: 20vw;
+        right: 10vw;
     }
 
     .bg-noise_right,.bg-noise_right_2 {
@@ -1458,7 +1476,8 @@ h1 strong {
     }
 
     #content {
-        width: var(--ancho-pagina)
+        width: var(--ancho-pagina);
+        left: 27px;
     }
 
     #content {
@@ -1466,10 +1485,7 @@ h1 strong {
     }
 
     #inner {
-        height: 98%
-    }
-
-    #inner {
+        height: 98%;
         column-gap: var(--gap);
         column-width: var(--ancho-pagina)
     }
@@ -1504,4 +1520,13 @@ h1 strong {
         border: none;
         top: auto
     }
+}
+@media (max-width: 520px) {
+    :root {
+        --ancho-pagina:320px;
+        --gap: 0px;
+        --cap-mt: 56px;
+        --cap-mb: 64px
+    }
+
 }
