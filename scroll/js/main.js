@@ -186,6 +186,7 @@ function getPositionDom() {
   $("#content").offset(), parseInt($("#content").css("left"), 10);
 }
 function renderInfoPage() {
+  console.log(" - - - - - - - - chapters");
   $("#infopage").html(pageCur + "  <span>/</span>  " + pageTot_SUM);
 }
 function hasContentAnimateQueue() {
