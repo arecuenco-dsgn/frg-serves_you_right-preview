@@ -1005,6 +1005,7 @@ h1 strong {
     left: 0;
     width: var(--ancho-pagina);
     height: 100%;
+    overflow-y: hidden;
     overflow-x: auto;
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
