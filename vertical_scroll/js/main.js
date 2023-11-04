@@ -292,6 +292,9 @@ function start() {
 
     console.log(" - - - - - - - - * - - - - - - - - ");
 
+    var span_1 = Math.abs(document.getElementById("span_1").getBoundingClientRect().height);
+    console.log("span_1: " + span_1);
+
     console.log("Chapters SUM: " + chaptersSUM);
 
     pageTot_SUM =  Math.floor( (chaptersSUM / pgwidth)  )

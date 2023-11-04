@@ -178,7 +178,9 @@ function positionZoom() {
     (elmSpan = $("#inner").append("<span></span>")),
     (posSpan = Math.floor( $("#inner").find("span:last-of-type").position().left )),
     (cntWidth = posSpan + (areaWidth + gap)),
-    (pageTot = pageTot_SUM);
+    (pageTot = pageTot_SUM),
+    (posSpan = Math.floor( $("#inner").find("span:last-of-type").remove ));
+    
 }
 
 
@@ -186,7 +188,6 @@ function getPositionDom() {
   $("#content").offset(), parseInt($("#content").css("left"), 10);
 }
 function renderInfoPage() {
-  console.log(" - - - - - - - - chapters");
   $("#infopage").html(pageCur + "  <span>/</span>  " + pageTot_SUM);
 }
 function hasContentAnimateQueue() {
@@ -204,6 +205,11 @@ function next() {
                 renderInfoPage();
                 console.log("t: " + t);
                 console.log("pageCur: " + pageCur);
+                
+                console.log("Position: " + (document.getElementById("content").scrollLeft));
+
+                console.log(" - - - - - - - - NEXT - IF - END");
+
         } else if (pageCur = pageTot_SUM) {
             console.log(" - - - - - - - - NEXT - ELSE IF");    
             var t = document.getElementById("content").scrollLeft = 0;
@@ -238,9 +244,8 @@ function start() {
     var t = document.getElementById("inner"); 
         t.addEventListener("swiped-left", prev),
         t.addEventListener("swiped-right", prev);
-        $("#inner").append("<span style='width: 800px;'>Hello</span>");
     
-
+    /*
     var width_1 = Math.abs(document.getElementById("width_1").getBoundingClientRect().width);
     console.log("width_1: " + width_1);
     var width_X = Math.abs(document.getElementById("width_X").getBoundingClientRect().width);
@@ -287,12 +292,90 @@ function start() {
     console.log("width_22: " + width_22);
     var width_23 = Math.abs(document.getElementById("width_23").getBoundingClientRect().width);
     console.log("width_23: " + width_23);
+    */
+    
+    
+    
+    console.log(" - - - - - - - - * - - - - - - - - ");
 
-    var chaptersSUM = width_1 + width_X + width_3 + width_4 + width_5 + width_6 + width_7 + width_8 + width_9 + width_10 + width_11 + width_12 + width_13 + width_14 + width_15 + width_16 + width_17 + width_18 + width_19 + width_20 + width_21 + width_22 + width_23;
+    var span_1 = Math.abs(document.getElementById("span_1").offsetLeft + pgwidth);
+    console.log("span_1: " + span_1);
+    var span_2 = Math.abs(document.getElementById("span_2").offsetLeft + pgwidth);
+    console.log("span_2: " + span_2);
+    var span_3 = Math.abs(document.getElementById("span_3").offsetLeft + pgwidth);
+    console.log("span_3: " + span_3);
+    var span_4 = Math.abs(document.getElementById("span_4").offsetLeft + pgwidth);
+    console.log("span_4: " + span_4);
+    var span_5 = Math.abs(document.getElementById("span_5").offsetLeft + pgwidth);
+    console.log("span_5: " + span_5);
+    var span_6 = Math.abs(document.getElementById("span_6").offsetLeft + pgwidth);
+    console.log("span_6: " + span_6);
+    var span_7 = Math.abs(document.getElementById("span_7").offsetLeft + pgwidth);
+    console.log("span_7: " + span_7);
+    var span_8 = Math.abs(document.getElementById("span_8").offsetLeft + pgwidth);
+    console.log("span_8: " + span_8);
+    var span_9 = Math.abs(document.getElementById("span_9").offsetLeft + pgwidth);
+    console.log("span_9: " + span_9);
+    var span_10 = Math.abs(document.getElementById("span_10").offsetLeft + pgwidth);
+    console.log("span_10: " + span_10);
+    var span_11 = Math.abs(document.getElementById("span_11").offsetLeft + pgwidth);
+    console.log("span_11: " + span_11);
+    var span_12 = Math.abs(document.getElementById("span_12").offsetLeft + pgwidth);
+    console.log("span_12: " + span_12);
+    var span_13 = Math.abs(document.getElementById("span_13").offsetLeft + pgwidth);
+    console.log("span_13: " + span_13);
+    var span_14 = Math.abs(document.getElementById("span_14").offsetLeft + pgwidth);
+    console.log("span_14: " + span_14);
+    var span_15 = Math.abs(document.getElementById("span_15").offsetLeft + pgwidth);
+    console.log("span_15: " + span_15);
+    var span_16 = Math.abs(document.getElementById("span_16").offsetLeft + pgwidth);
+    console.log("span_16: " + span_16);
+    var span_17 = Math.abs(document.getElementById("span_17").offsetLeft + pgwidth);
+    console.log("span_17: " + span_17);
+    var span_18 = Math.abs(document.getElementById("span_18").offsetLeft + pgwidth);
+    console.log("span_18: " + span_18);
+    var span_19 = Math.abs(document.getElementById("span_19").offsetLeft + pgwidth);
+    console.log("span_19: " + span_19);
+    var span_20 = Math.abs(document.getElementById("span_20").offsetLeft + pgwidth);
+    console.log("span_20: " + span_20);
+    var span_21 = Math.abs(document.getElementById("span_21").offsetLeft + pgwidth);
+    console.log("span_21: " + span_21);
+    var span_22 = Math.abs(document.getElementById("span_22").offsetLeft + pgwidth);
+    console.log("span_22: " + span_22);
+    var span_23 = Math.abs(document.getElementById("span_23").offsetLeft + pgwidth);
+    console.log("span_23: " + span_23);
+    
+    var chaptersSUM = span_1 + span_2 + span_3 + span_4 + span_5 + span_6 + span_7 + span_8 + span_9 + span_10 + span_11 + span_12 + span_13 + span_14 + span_15 + span_16 + span_17 + span_18 + span_19 + span_20 + span_21 + span_22 + span_23;
+
+    console.log("Chapters SUM: " + chaptersSUM);
 
     console.log(" - - - - - - - - * - - - - - - - - ");
 
-    console.log("Chapters SUM: " + chaptersSUM);
+    var width_1 = Math.abs(document.getElementById("width_1").setAttribute('style', 'width:' + span_1 + 'px;'));
+    var width_X = Math.abs(document.getElementById("width_2").setAttribute('style', 'width:' + span_2 + 'px;'));
+    var width_3 = Math.abs(document.getElementById("width_3").setAttribute('style', 'width:' + span_3 + 'px;'));
+    var width_4 = Math.abs(document.getElementById("width_4").setAttribute('style', 'width:' + span_4 + 'px;'));
+    var width_5 = Math.abs(document.getElementById("width_5").setAttribute('style', 'width:' + span_5 + 'px;'));
+    var width_6 = Math.abs(document.getElementById("width_6").setAttribute('style', 'width:' + span_6 + 'px;'));
+    var width_7 = Math.abs(document.getElementById("width_7").setAttribute('style', 'width:' + span_7 + 'px;'));
+    var width_8 = Math.abs(document.getElementById("width_8").setAttribute('style', 'width:' + span_8 + 'px;'));
+    var width_9 = Math.abs(document.getElementById("width_9").setAttribute('style', 'width:' + span_9 + 'px;'));
+    var width_10 = Math.abs(document.getElementById("width_10").setAttribute('style', 'width:' + span_10 + 'px;'));
+    var width_11 = Math.abs(document.getElementById("width_11").setAttribute('style', 'width:' + span_11 + 'px;'));
+    var width_12 = Math.abs(document.getElementById("width_12").setAttribute('style', 'width:' + span_12 + 'px;'));
+    var width_13 = Math.abs(document.getElementById("width_13").setAttribute('style', 'width:' + span_13 + 'px;'));
+    var width_14 = Math.abs(document.getElementById("width_14").setAttribute('style', 'width:' + span_14 + 'px;'));
+    var width_15 = Math.abs(document.getElementById("width_15").setAttribute('style', 'width:' + span_15 + 'px;'));
+    var width_16 = Math.abs(document.getElementById("width_16").setAttribute('style', 'width:' + span_16 + 'px;'));
+    var width_17 = Math.abs(document.getElementById("width_17").setAttribute('style', 'width:' + span_17 + 'px;'));
+    var width_18 = Math.abs(document.getElementById("width_18").setAttribute('style', 'width:' + span_18 + 'px;'));
+    var width_19 = Math.abs(document.getElementById("width_19").setAttribute('style', 'width:' + span_19 + 'px;'));
+    var width_20 = Math.abs(document.getElementById("width_20").setAttribute('style', 'width:' + span_20 + 'px;'));
+    var width_21 = Math.abs(document.getElementById("width_21").setAttribute('style', 'width:' + span_21 + 'px;'));
+    var width_22 = Math.abs(document.getElementById("width_22").setAttribute('style', 'width:' + span_22 + 'px;'));
+    var width_23 = Math.abs(document.getElementById("width_23").setAttribute('style', 'width:' + span_23 + 'px;'));
+
+
 
     pageTot_SUM =  Math.floor( (chaptersSUM / pgwidth)  )
     console.log("Pages by SUM: " + pageTot_SUM);
