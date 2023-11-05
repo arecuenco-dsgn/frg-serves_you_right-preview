@@ -1387,8 +1387,10 @@ h1 strong {
         height: calc(var(--app-height) - var(--cap-mt) - var(--cap-mb));
         width: var(--ancho-pagina);
         padding-left: var(--gap);
+        padding-top: 0px;
         position: fixed;
-        top: var(--cap-mt)
+        top: var(--cap-mt);
+        left: 27px;
     }
 
     #notes_box article {
@@ -1478,7 +1480,7 @@ h1 strong {
 
     #content {
         width: var(--ancho-pagina);
-        left: 27px;
+        left: 0px;
     }
 
     #content {
@@ -1489,6 +1491,12 @@ h1 strong {
         height: 98%;
         column-gap: var(--gap);
         column-width: var(--ancho-pagina)
+    }
+    #inner article h1, #inner article .paragraph, #inner article .dialog, #inner article span {
+        padding-right: 32px;
+    }
+    #inner article h1 {
+        width: var(--ancho-pagina);
     }
 
     .bg-noise_center-dark,.bg-noise_center_2-dark {
@@ -1524,7 +1532,7 @@ h1 strong {
 }
 @media (max-width: 520px) {
     :root {
-        --ancho-pagina:320px;
+        --ancho-pagina:342px;
         --gap: 0px;
         --cap-mt: 56px;
         --cap-mb: 64px
