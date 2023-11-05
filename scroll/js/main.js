@@ -51,7 +51,7 @@ var lastPage,
     contentPos = document.getElementById("content").scrollLeft;
 
 const scroller = document.getElementById("content");  
-const output = document.getElementById("output");
+
 
 function scrollPages(min, max) {
     contentPos = document.getElementById("content").scrollLeft;
@@ -72,8 +72,11 @@ function scrollPages(min, max) {
     renderInfoPage();
 }
 
-scroller.addEventListener("scrollend", (event) => {
-    scrollPages()
+scroller.addEventListener("scroll", (event) => {
+    console.log(" ...... SCROLLING");
+    setTimeout(() => {
+      scrollPages();
+    }, 500);
 });
 
 function showIndex() {
@@ -85,7 +88,7 @@ function showIndex() {
       x.style.display = "block";
       setTimeout(() => {
         document.getElementById("index").style.opacity = "1";
-      }, 1000);
+      }, 500);
     } else {
       console.log("hide it");
       document.getElementById("index").style.opacity = "0";
@@ -93,12 +96,12 @@ function showIndex() {
         x.style.display = "none";
       }, 1000);
     }
-  }, 1000)
+  }, 200)
 }
 
 var innerStart = Math.ceil(Math.abs(document.getElementById("inner").getBoundingClientRect().left));
 
-
+/*
 var chapter_1 = 0;
 var chapter_2 = Math.ceil(Math.abs(document.getElementById("chapter_2").getBoundingClientRect().left));
 var chapter_3 = Math.ceil(Math.abs(document.getElementById("chapter_3").getBoundingClientRect().left));
@@ -123,7 +126,7 @@ var chapter_21 = Math.ceil(Math.abs(document.getElementById("chapter_21").getBou
 var chapter_22 = Math.ceil(Math.abs(document.getElementById("chapter_22").getBoundingClientRect().left)) + (innerStart * 3);
 var chapter_23 = Math.ceil(Math.abs(document.getElementById("chapter_23").getBoundingClientRect().left)) + (innerStart * 3);
 
-/*
+
 console.log("chapter_1: " + chapter_1);
 console.log("chapter_2: " + chapter_2);
 console.log("chapter_3: " + chapter_3);
@@ -149,29 +152,8 @@ console.log("chapter_22: " + chapter_22);
 console.log("chapter_23: " + chapter_23);
 */
 
-function scrollChapter_1(obj) { anchorNav = document.getElementById("content").scrollLeft = chapter_1; }
-function scrollChapter_2(obj) { anchorNav = document.getElementById("content").scrollLeft = chapter_2; }
-function scrollChapter_3(obj) { anchorNav = document.getElementById("content").scrollLeft = chapter_3; }
-function scrollChapter_4(obj) { anchorNav = document.getElementById("content").scrollLeft = chapter_4; }
-function scrollChapter_5(obj) { anchorNav = document.getElementById("content").scrollLeft = chapter_5; }
-function scrollChapter_6(obj) { anchorNav = document.getElementById("content").scrollLeft = chapter_6; }
-function scrollChapter_7(obj) { anchorNav = document.getElementById("content").scrollLeft = chapter_7; }
-function scrollChapter_8(obj) { anchorNav = document.getElementById("content").scrollLeft = chapter_8; }
-function scrollChapter_9(obj) { anchorNav = document.getElementById("content").scrollLeft = chapter_9; }
-function scrollChapter_10(obj) { anchorNav = document.getElementById("content").scrollLeft = chapter_10; }
-function scrollChapter_11(obj) { anchorNav = document.getElementById("content").scrollLeft = chapter_11; }
-function scrollChapter_12(obj) { anchorNav = document.getElementById("content").scrollLeft = chapter_12; }
-function scrollChapter_13(obj) { anchorNav = document.getElementById("content").scrollLeft = chapter_13; }
-function scrollChapter_14(obj) { anchorNav = document.getElementById("content").scrollLeft = chapter_14; }
-function scrollChapter_15(obj) { anchorNav = document.getElementById("content").scrollLeft = chapter_15; }
-function scrollChapter_16(obj) { anchorNav = document.getElementById("content").scrollLeft = chapter_16; }
-function scrollChapter_17(obj) { anchorNav = document.getElementById("content").scrollLeft = chapter_17; }
-function scrollChapter_18(obj) { anchorNav = document.getElementById("content").scrollLeft = chapter_18; }
-function scrollChapter_19(obj) { anchorNav = document.getElementById("content").scrollLeft = chapter_19; }
-function scrollChapter_20(obj) { anchorNav = document.getElementById("content").scrollLeft = chapter_20; }
-function scrollChapter_21(obj) { anchorNav = document.getElementById("content").scrollLeft = chapter_21; }
-function scrollChapter_22(obj) { anchorNav = document.getElementById("content").scrollLeft = chapter_22; }
-function scrollChapter_23(obj) { anchorNav = document.getElementById("content").scrollLeft = chapter_23; }
+console.log(" - - - - - - - - * - - - - - - - - ");
+
 
 
 function positionZoom() {
@@ -245,58 +227,6 @@ function start() {
         t.addEventListener("swiped-left", prev),
         t.addEventListener("swiped-right", prev);
     
-    /*
-    var width_1 = Math.abs(document.getElementById("width_1").getBoundingClientRect().width);
-    console.log("width_1: " + width_1);
-    var width_X = Math.abs(document.getElementById("width_X").getBoundingClientRect().width);
-    console.log("width_X: " + width_X);
-    var width_3 = Math.abs(document.getElementById("width_3").getBoundingClientRect().width);
-    console.log("width_3: " + width_3);
-    var width_4 = Math.abs(document.getElementById("width_4").getBoundingClientRect().width);
-    console.log("width_4: " + width_4);
-    var width_5 = Math.abs(document.getElementById("width_5").getBoundingClientRect().width);
-    console.log("width_5: " + width_5);
-    var width_6 = Math.abs(document.getElementById("width_6").getBoundingClientRect().width);
-    console.log("width_6: " + width_6);
-    var width_7 = Math.abs(document.getElementById("width_7").getBoundingClientRect().width);
-    console.log("width_7: " + width_7);
-    var width_8 = Math.abs(document.getElementById("width_8").getBoundingClientRect().width);
-    console.log("width_8: " + width_8);
-    var width_9 = Math.abs(document.getElementById("width_9").getBoundingClientRect().width);
-    console.log("width_9: " + width_9);
-    var width_10 = Math.abs(document.getElementById("width_10").getBoundingClientRect().width);
-    console.log("width_10: " + width_10);
-    var width_11 = Math.abs(document.getElementById("width_11").getBoundingClientRect().width);
-    console.log("width_11: " + width_11);
-    var width_12 = Math.abs(document.getElementById("width_12").getBoundingClientRect().width);
-    console.log("width_12: " + width_12);
-    var width_13 = Math.abs(document.getElementById("width_13").getBoundingClientRect().width);
-    console.log("width_13: " + width_13);
-    var width_14 = Math.abs(document.getElementById("width_14").getBoundingClientRect().width);
-    console.log("width_14: " + width_14);
-    var width_15 = Math.abs(document.getElementById("width_15").getBoundingClientRect().width);
-    console.log("width_15: " + width_15);
-    var width_16 = Math.abs(document.getElementById("width_16").getBoundingClientRect().width);
-    console.log("width_16: " + width_16);
-    var width_17 = Math.abs(document.getElementById("width_17").getBoundingClientRect().width);
-    console.log("width_17: " + width_17);
-    var width_18 = Math.abs(document.getElementById("width_18").getBoundingClientRect().width);
-    console.log("width_18: " + width_18);
-    var width_19 = Math.abs(document.getElementById("width_19").getBoundingClientRect().width);
-    console.log("width_19: " + width_19);
-    var width_20 = Math.abs(document.getElementById("width_20").getBoundingClientRect().width);
-    console.log("width_20: " + width_20);
-    var width_21 = Math.abs(document.getElementById("width_21").getBoundingClientRect().width);
-    console.log("width_21: " + width_21);
-    var width_22 = Math.abs(document.getElementById("width_22").getBoundingClientRect().width);
-    console.log("width_22: " + width_22);
-    var width_23 = Math.abs(document.getElementById("width_23").getBoundingClientRect().width);
-    console.log("width_23: " + width_23);
-    */
-    
-    
-    
-    console.log(" - - - - - - - - * - - - - - - - - ");
 
     var span_1 = Math.abs(document.getElementById("span_1").offsetLeft + pgwidth);
     console.log("span_1: " + span_1);
@@ -344,12 +274,39 @@ function start() {
     console.log("span_22: " + span_22);
     var span_23 = Math.abs(document.getElementById("span_23").offsetLeft + pgwidth);
     console.log("span_23: " + span_23);
-    
-    var chaptersSUM = span_1 + span_2 + span_3 + span_4 + span_5 + span_6 + span_7 + span_8 + span_9 + span_10 + span_11 + span_12 + span_13 + span_14 + span_15 + span_16 + span_17 + span_18 + span_19 + span_20 + span_21 + span_22 + span_23;
 
+    var chaptersSUM = span_1 + span_2 + span_3 + span_4 + span_5 + span_6 + span_7 + span_8 + span_9 + span_10 + span_11 + span_12 + span_13 + span_14 + span_15 + span_16 + span_17 + span_18 + span_19 + span_20 + span_21 + span_22 + span_23;         
+    
     console.log("Chapters SUM: " + chaptersSUM);
 
+    var chapter_1 = 0;
+    var chapter_2 = span_1 ;
+    var chapter_3 = chapter_2 + span_2 ;
+    var chapter_4 = chapter_3 + span_3 ;
+    var chapter_5 = chapter_4 + span_4 ;
+    var chapter_6 = chapter_5 + span_5 ;
+    var chapter_7 = chapter_6 + span_6 ;
+    var chapter_8 = chapter_7 + span_7 ;
+    var chapter_9 = chapter_8 + span_8 ;
+    var chapter_10 = chapter_9 + span_9 ;
+    var chapter_11 = chapter_10 + span_10 ;
+    var chapter_12 = chapter_11 + span_11 ;
+    var chapter_13 = chapter_12 + span_12 ;
+    var chapter_14 = chapter_13 + span_13 ;
+    var chapter_15 = chapter_14 + span_14 ;
+    var chapter_16 = chapter_15 + span_15 ;
+    var chapter_17 = chapter_16 + span_16 ;
+    var chapter_18 = chapter_17 + span_17 ;
+    var chapter_19 = chapter_18 + span_18 ;
+    var chapter_20 = chapter_19 + span_19 ;
+    var chapter_21 = chapter_20 + span_20 ;
+    var chapter_22 = chapter_21 + span_21 ;
+    var chapter_23 = chapter_22 + span_22 ;
+
+    console.log("chapter_3 - Start:" + chapter_3);
+
     console.log(" - - - - - - - - * - - - - - - - - ");
+
 
     var width_1 = Math.abs(document.getElementById("width_1").setAttribute('style', 'width:' + span_1 + 'px;'));
     var width_X = Math.abs(document.getElementById("width_2").setAttribute('style', 'width:' + span_2 + 'px;'));
@@ -382,9 +339,7 @@ function start() {
     
 
     var scroller = document.getElementById("content");  
-    var output = document.getElementById("output");
-
-    output.textContent = `scrollTop: ${scroller.scrollleft}`;
+    
 
     innerPages = Math.floor( $("#inner").width() );
 
@@ -402,6 +357,54 @@ function start() {
     getPositionDom(), renderInfoPage(), scrollPages();
   }, 1000)
 }
+
+function scrollChapter_1(obj) {   document.getElementById("content").scrollLeft = 0; }
+
+function scrollChapter_2(obj) {   scroll_2 = document.getElementById("width_2").offsetLeft;
+                                  document.getElementById("content").scrollLeft = scroll_2;}
+function scrollChapter_3(obj) {   scroll_3 = document.getElementById("width_3").offsetLeft;
+                                  document.getElementById("content").scrollLeft = scroll_3;}
+function scrollChapter_4(obj) {   scroll_4 = document.getElementById("width_4").offsetLeft;
+                                  document.getElementById("content").scrollLeft = scroll_4;}
+function scrollChapter_5(obj) {   scroll_5 = document.getElementById("width_5").offsetLeft;
+                                  document.getElementById("content").scrollLeft = scroll_5;}
+function scrollChapter_6(obj) {   scroll_6 = document.getElementById("width_6").offsetLeft;
+                                  document.getElementById("content").scrollLeft = scroll_6;}
+function scrollChapter_7(obj) {   scroll_7 = document.getElementById("width_7").offsetLeft;
+                                  document.getElementById("content").scrollLeft = scroll_7;}
+function scrollChapter_8(obj) {   scroll_8 = document.getElementById("width_8").offsetLeft;
+                                  document.getElementById("content").scrollLeft = scroll_8;}
+function scrollChapter_9(obj) {   scroll_9 = document.getElementById("width_9").offsetLeft;
+                                  document.getElementById("content").scrollLeft = scroll_9;}
+function scrollChapter_10(obj) {  scroll_10 = document.getElementById("width_10").offsetLeft;
+                                  document.getElementById("content").scrollLeft = scroll_10;}
+function scrollChapter_11(obj) {  scroll_11 = document.getElementById("width_11").offsetLeft;
+                                  document.getElementById("content").scrollLeft = scroll_11;}
+function scrollChapter_12(obj) {  scroll_12 = document.getElementById("width_12").offsetLeft;
+                                  document.getElementById("content").scrollLeft = scroll_12;}
+function scrollChapter_13(obj) {  scroll_13 = document.getElementById("width_13").offsetLeft;
+                                  document.getElementById("content").scrollLeft = scroll_13;}
+function scrollChapter_14(obj) {  scroll_14 = document.getElementById("width_14").offsetLeft;
+                                  document.getElementById("content").scrollLeft = scroll_14;}
+function scrollChapter_15(obj) {  scroll_15 = document.getElementById("width_15").offsetLeft;
+                                  document.getElementById("content").scrollLeft = scroll_15;}
+function scrollChapter_16(obj) {  scroll_16 = document.getElementById("width_16").offsetLeft;
+                                  document.getElementById("content").scrollLeft = scroll_16;}
+function scrollChapter_17(obj) {  scroll_17 = document.getElementById("width_17").offsetLeft;
+                                  document.getElementById("content").scrollLeft = scroll_17;}
+function scrollChapter_18(obj) {  scroll_18 = document.getElementById("width_18").offsetLeft;
+                                  document.getElementById("content").scrollLeft = scroll_18;}
+function scrollChapter_19(obj) {  scroll_19 = document.getElementById("width_19").offsetLeft;
+                                  document.getElementById("content").scrollLeft = scroll_19;}
+function scrollChapter_20(obj) {  scroll_20 = document.getElementById("width_20").offsetLeft;
+                                  document.getElementById("content").scrollLeft = scroll_20;}
+function scrollChapter_21(obj) {  scroll_21 = document.getElementById("width_21").offsetLeft;
+                                  document.getElementById("content").scrollLeft = scroll_21;}
+function scrollChapter_22(obj) {  scroll_22 = document.getElementById("width_22").offsetLeft;
+                                  document.getElementById("content").scrollLeft = scroll_22;}
+function scrollChapter_23(obj) {  scroll_23 = document.getElementById("width_23").offsetLeft;
+                                  document.getElementById("content").scrollLeft = scroll_23;}
+
 
 window.addEventListener("load",  start() );
 
