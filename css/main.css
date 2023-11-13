@@ -1038,12 +1038,19 @@ h1 strong {
 }
 
 #inner article {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width: max-content;
     min-width: max-content;
+    display: block;
+    column-gap: 0px;
+    -webkit-column-gap: 0px;
+    width: max-content;
+    height: fit-content;
+    height: -webkit-fit-content;
 }
+
+#inner article * {
+    scroll-snap-align: start;
+}
+
 
 /*
 #inner article:nth-child(odd) {
@@ -1055,7 +1062,6 @@ h1 strong {
 
 #inner article h1{
     width: calc(var(--ancho-pagina) - 48px);
-    scroll-snap-align: start;
     padding-right: 48px;
 }
 #inner article .paragraph {

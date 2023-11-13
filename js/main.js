@@ -20,6 +20,15 @@ function closeNote() {
   });
 }
 
+var inner_Height = Math.abs(document.getElementById("inner").clientHeight);
+
+function pagesHeight() {  
+  document.documentElement.style.setProperty(
+    "--inner-height",
+    inner_Height + `px`
+  );
+  console.log("inner_Height: " + inner_Height);
+}
 function resize() {
   positionZoom(), renderInfoPage(), start();
 }
@@ -30,7 +39,9 @@ const appHeight = () => {
     `${window.innerHeight}px`
   );
 };
-window.addEventListener("resize", appHeight), appHeight();
+window.addEventListener("resize", appHeight), appHeight(), pagesHeight();
+
+
 
 var root = document.querySelector(":root"),
     root_var = getComputedStyle(root),
@@ -52,33 +63,57 @@ var lastPage,
 
 const scroller = document.getElementById("content");  
 
-
-function scrollPages(min, max) {
-    contentPos = document.getElementById("content").scrollLeft;
-
-    console.log(" - - - - - - - - SCROLL");
-    pageCalc = (contentPos / areaWidth) + 1;
-    console.log("contentPos: " + contentPos);
-    console.log("pageCalc: " + pageCalc);
-    
-    
-    const MIN = min ?? 1;
-    const MAX = max ?? pageTot;
-    roundingCalc = Math.floor(pageCalc);
-    parsed = parseInt(roundingCalc);
-    pageCur = Math.min(Math.max(parsed, MIN), MAX);
-    
-    console.log("pageCur: " + pageCur);
-    renderInfoPage();
+// function for scrollbar click detection
+var clickedOnScrollbar = function(mouseX){
+  if( $(window).outerWidth() <= mouseX ){
+    return true;
+  }
 }
 
-scroller.addEventListener("scroll", (event) => {
-    console.log(" ...... SCROLLING");
-    setTimeout(() => {
-      scrollPages();
-    }, 500);
+// detect click for mousedown event
+$(document).mouseup(function(e){
+  if( clickedOnScrollbar(e.clientX) ){
+    alert("clicked on scrollbar");
+  }
 });
 
+
+var scrollSwicth = 1;
+
+function scrollPages(min, max) {
+    if (scrollSwicth == 1) {
+      contentPos = document.getElementById("content").scrollLeft;
+
+      console.log(" - - - - - - - - SCROLL");
+      pageCalc = (contentPos / areaWidth) + 1;
+      console.log("contentPos: " + contentPos);
+      console.log("pageCalc: " + pageCalc);
+      
+      
+      const MIN = min ?? 1;
+      const MAX = max ?? pageTot;
+      roundingCalc = Math.floor(pageCalc);
+      parsed = parseInt(roundingCalc);
+      pageCur = Math.min(Math.max(parsed, MIN), MAX);
+      
+      console.log("pageCur: " + pageCur);
+      renderInfoPage();
+    }
+}
+function pagesMove() {
+  setTimeout(() => {
+    scrollPages();
+  }, 600);
+}
+
+/*
+scroller.addEventListener("scroll", (event) => {
+    setTimeout(() => {
+    console.log(" ...... SCROLLING");
+      scrollPages();
+    }, 1800);
+});
+*/
 function showIndex() {
   console.log("- - - - - - - -> showIndex");
   setTimeout(() => {
@@ -204,34 +239,44 @@ function next() {
             var t = document.getElementById("content").scrollLeft = areaWidth * pageCur; 
             var e = $("#content");
                 console.log(" - - - - - - - - NEXT - IF");
+                scrollSwicth = 0;
                 pageCur++,
                 renderInfoPage();
                 console.log("t: " + t);
                 console.log("pageCur: " + pageCur);
-                
-                console.log("Position: " + (document.getElementById("content").scrollLeft));
-
                 console.log(" - - - - - - - - NEXT - IF - END");
 
+                setTimeout(() => { scrollSwicth = 1; console.log("scrollSwicth: " + scrollSwicth);}, 2000);
+
         } else if (pageCur = pageTot_SUM) {
-            console.log(" - - - - - - - - NEXT - ELSE IF");    
+            console.log(" - - - - - - - - NEXT - ELSE IF"); 
+            scrollSwicth = 0;   
             var t = document.getElementById("content").scrollLeft = 0;
+
+            setTimeout(() => { scrollSwicth = 1; console.log("scrollSwicth: " + scrollSwicth); }, 2000);
         }
     }
 }
 function prev() {
     if (!hasContentAnimateQueue()) {
         if (pageCur > 1) { 
-            var t = document.getElementById("content").scrollLeft = (areaWidth * (pageCur - 1.9)); 
+            var t = document.getElementById("content").scrollLeft = (areaWidth * (pageCur - 2)); 
             var e = $("#content");
                 console.log(" - - - - - - - - PREV - IF");
+                scrollSwicth = 0;
                 pageCur--,
                 renderInfoPage();
                 console.log("t: " + t);
                 console.log("pageCur: " + pageCur);
+                console.log(" - - - - - - - - PREV - IF - END");
+
+                setTimeout(() => { scrollSwicth = 1; console.log("scrollSwicth: " + scrollSwicth); }, 2000);
         } else if (pageCur = 1) {
             console.log(" - - - - - - - - PREV - ELSE IF");
-            var t = document.getElementById("content").scrollLeft = areaWidth * pageTot_SUM; 
+            scrollSwicth = 0;
+            var t = document.getElementById("content").scrollLeft = areaWidth * pageTot_SUM;
+
+            setTimeout(() => { scrollSwicth = 1; console.log("scrollSwicth: " + scrollSwicth); }, 2000);
         }
     } 
 }
@@ -249,51 +294,100 @@ function start() {
         t.addEventListener("swiped-right", prev);
     
 
-    var span_1 = Math.abs(document.getElementById("span_1").offsetLeft + pgwidth);
+        var height_1 = Math.ceil( Math.abs(document.getElementById("width_1").clientHeight) / inner_Height );
+        console.log("height_1: " + height_1);
+        var height_2 = Math.ceil( Math.abs(document.getElementById("width_2").clientHeight) / inner_Height );
+        console.log("height_2: " + height_2);
+        var height_3 = Math.ceil( Math.abs(document.getElementById("width_3").clientHeight) / inner_Height );
+        console.log("height_3: " + height_3);
+        var height_4 = Math.ceil( Math.abs(document.getElementById("width_4").clientHeight) / inner_Height );
+        console.log("height_4: " + height_4);
+        var height_5 = Math.ceil( Math.abs(document.getElementById("width_5").clientHeight) / inner_Height );
+        console.log("height_5: " + height_5);
+        var height_6 = Math.ceil( Math.abs(document.getElementById("width_6").clientHeight) / inner_Height );
+        console.log("height_6: " + height_6);
+        var height_7 = Math.ceil( Math.abs(document.getElementById("width_7").clientHeight) / inner_Height );
+        console.log("height_7: " + height_7);
+        var height_8 = Math.ceil( Math.abs(document.getElementById("width_8").clientHeight) / inner_Height );
+        console.log("height_8: " + height_8);
+        var height_9 = Math.ceil( Math.abs(document.getElementById("width_9").clientHeight) / inner_Height );
+        console.log("height_9: " + height_9);
+        var height_10 = Math.ceil( Math.abs(document.getElementById("width_10").clientHeight) / inner_Height );
+        console.log("height_10: " + height_10);
+        var height_11 = Math.ceil( Math.abs(document.getElementById("width_11").clientHeight) / inner_Height );
+        console.log("height_11: " + height_11);
+        var height_12 = Math.ceil( Math.abs(document.getElementById("width_12").clientHeight) / inner_Height );
+        console.log("height_12: " + height_12);
+        var height_13 = Math.ceil( Math.abs(document.getElementById("width_13").clientHeight) / inner_Height );
+        console.log("height_13: " + height_13);
+        var height_14 = Math.ceil( Math.abs(document.getElementById("width_14").clientHeight) / inner_Height );
+        console.log("height_14: " + height_14);
+        var height_15 = Math.ceil( Math.abs(document.getElementById("width_15").clientHeight) / inner_Height );
+        console.log("height_15: " + height_15);
+        var height_16 = Math.ceil( Math.abs(document.getElementById("width_16").clientHeight) / inner_Height );
+        console.log("height_16: " + height_16);
+        var height_17 = Math.ceil( Math.abs(document.getElementById("width_17").clientHeight) / inner_Height );
+        console.log("height_17: " + height_17);
+        var height_18 = Math.ceil( Math.abs(document.getElementById("width_18").clientHeight) / inner_Height );
+        console.log("height_18: " + height_18);
+        var height_19 = Math.ceil( Math.abs(document.getElementById("width_19").clientHeight) / inner_Height );
+        console.log("height_19: " + height_19);
+        var height_20 = Math.ceil( Math.abs(document.getElementById("width_20").clientHeight) / inner_Height );
+        console.log("height_20: " + height_20);
+        var height_21 = Math.ceil( Math.abs(document.getElementById("width_21").clientHeight) / inner_Height );
+        console.log("height_21: " + height_21);
+        var height_22 = Math.ceil( Math.abs(document.getElementById("width_22").clientHeight) / inner_Height );
+        console.log("height_22: " + height_22);
+        var height_23 = Math.ceil( Math.abs(document.getElementById("width_23").clientHeight) / inner_Height );
+        console.log("height_23: " + height_23);
+
+
+    
+    var span_1 = Math.abs(height_1 * pgwidth);
     console.log("span_1: " + span_1);
-    var span_2 = Math.abs(document.getElementById("span_2").offsetLeft + pgwidth);
+    var span_2 = Math.abs(height_2 * pgwidth);
     console.log("span_2: " + span_2);
-    var span_3 = Math.abs(document.getElementById("span_3").offsetLeft + pgwidth);
+    var span_3 = Math.abs(height_3 * pgwidth);
     console.log("span_3: " + span_3);
-    var span_4 = Math.abs(document.getElementById("span_4").offsetLeft + pgwidth);
+    var span_4 = Math.abs(height_4 * pgwidth);
     console.log("span_4: " + span_4);
-    var span_5 = Math.abs(document.getElementById("span_5").offsetLeft + pgwidth);
+    var span_5 = Math.abs(height_5 * pgwidth);
     console.log("span_5: " + span_5);
-    var span_6 = Math.abs(document.getElementById("span_6").offsetLeft + pgwidth);
+    var span_6 = Math.abs(height_6 * pgwidth);
     console.log("span_6: " + span_6);
-    var span_7 = Math.abs(document.getElementById("span_7").offsetLeft + pgwidth);
+    var span_7 = Math.abs(height_7 * pgwidth);
     console.log("span_7: " + span_7);
-    var span_8 = Math.abs(document.getElementById("span_8").offsetLeft + pgwidth);
+    var span_8 = Math.abs(height_8 * pgwidth);
     console.log("span_8: " + span_8);
-    var span_9 = Math.abs(document.getElementById("span_9").offsetLeft + pgwidth);
+    var span_9 = Math.abs(height_9 * pgwidth);
     console.log("span_9: " + span_9);
-    var span_10 = Math.abs(document.getElementById("span_10").offsetLeft + pgwidth);
+    var span_10 = Math.abs(height_10 * pgwidth);
     console.log("span_10: " + span_10);
-    var span_11 = Math.abs(document.getElementById("span_11").offsetLeft + pgwidth);
+    var span_11 = Math.abs(height_11 * pgwidth);
     console.log("span_11: " + span_11);
-    var span_12 = Math.abs(document.getElementById("span_12").offsetLeft + pgwidth);
+    var span_12 = Math.abs(height_12 * pgwidth);
     console.log("span_12: " + span_12);
-    var span_13 = Math.abs(document.getElementById("span_13").offsetLeft + pgwidth);
+    var span_13 = Math.abs(height_13 * pgwidth);
     console.log("span_13: " + span_13);
-    var span_14 = Math.abs(document.getElementById("span_14").offsetLeft + pgwidth);
+    var span_14 = Math.abs(height_14 * pgwidth);
     console.log("span_14: " + span_14);
-    var span_15 = Math.abs(document.getElementById("span_15").offsetLeft + pgwidth);
+    var span_15 = Math.abs(height_15 * pgwidth);
     console.log("span_15: " + span_15);
-    var span_16 = Math.abs(document.getElementById("span_16").offsetLeft + pgwidth);
+    var span_16 = Math.abs(height_16 * pgwidth);
     console.log("span_16: " + span_16);
-    var span_17 = Math.abs(document.getElementById("span_17").offsetLeft + pgwidth);
+    var span_17 = Math.abs(height_17 * pgwidth);
     console.log("span_17: " + span_17);
-    var span_18 = Math.abs(document.getElementById("span_18").offsetLeft + pgwidth);
+    var span_18 = Math.abs(height_18 * pgwidth);
     console.log("span_18: " + span_18);
-    var span_19 = Math.abs(document.getElementById("span_19").offsetLeft + pgwidth);
+    var span_19 = Math.abs(height_19 * pgwidth);
     console.log("span_19: " + span_19);
-    var span_20 = Math.abs(document.getElementById("span_20").offsetLeft + pgwidth);
+    var span_20 = Math.abs(height_20 * pgwidth);
     console.log("span_20: " + span_20);
-    var span_21 = Math.abs(document.getElementById("span_21").offsetLeft + pgwidth);
+    var span_21 = Math.abs(height_21 * pgwidth);
     console.log("span_21: " + span_21);
-    var span_22 = Math.abs(document.getElementById("span_22").offsetLeft + pgwidth);
+    var span_22 = Math.abs(height_22 * pgwidth);
     console.log("span_22: " + span_22);
-    var span_23 = Math.abs(document.getElementById("span_23").offsetLeft + pgwidth);
+    var span_23 = Math.abs(height_23 * pgwidth);
     console.log("span_23: " + span_23);
 
     var chaptersSUM = span_1 + span_2 + span_3 + span_4 + span_5 + span_6 + span_7 + span_8 + span_9 + span_10 + span_11 + span_12 + span_13 + span_14 + span_15 + span_16 + span_17 + span_18 + span_19 + span_20 + span_21 + span_22 + span_23;         
@@ -329,29 +423,29 @@ function start() {
     console.log(" - - - - - - - - * - - - - - - - - ");
 
 
-    var width_1 = Math.abs(document.getElementById("width_1").setAttribute('style', 'width:' + span_1 + 'px;'));
-    var width_X = Math.abs(document.getElementById("width_2").setAttribute('style', 'width:' + span_2 + 'px;'));
-    var width_3 = Math.abs(document.getElementById("width_3").setAttribute('style', 'width:' + span_3 + 'px;'));
-    var width_4 = Math.abs(document.getElementById("width_4").setAttribute('style', 'width:' + span_4 + 'px;'));
-    var width_5 = Math.abs(document.getElementById("width_5").setAttribute('style', 'width:' + span_5 + 'px;'));
-    var width_6 = Math.abs(document.getElementById("width_6").setAttribute('style', 'width:' + span_6 + 'px;'));
-    var width_7 = Math.abs(document.getElementById("width_7").setAttribute('style', 'width:' + span_7 + 'px;'));
-    var width_8 = Math.abs(document.getElementById("width_8").setAttribute('style', 'width:' + span_8 + 'px;'));
-    var width_9 = Math.abs(document.getElementById("width_9").setAttribute('style', 'width:' + span_9 + 'px;'));
-    var width_10 = Math.abs(document.getElementById("width_10").setAttribute('style', 'width:' + span_10 + 'px;'));
-    var width_11 = Math.abs(document.getElementById("width_11").setAttribute('style', 'width:' + span_11 + 'px;'));
-    var width_12 = Math.abs(document.getElementById("width_12").setAttribute('style', 'width:' + span_12 + 'px;'));
-    var width_13 = Math.abs(document.getElementById("width_13").setAttribute('style', 'width:' + span_13 + 'px;'));
-    var width_14 = Math.abs(document.getElementById("width_14").setAttribute('style', 'width:' + span_14 + 'px;'));
-    var width_15 = Math.abs(document.getElementById("width_15").setAttribute('style', 'width:' + span_15 + 'px;'));
-    var width_16 = Math.abs(document.getElementById("width_16").setAttribute('style', 'width:' + span_16 + 'px;'));
-    var width_17 = Math.abs(document.getElementById("width_17").setAttribute('style', 'width:' + span_17 + 'px;'));
-    var width_18 = Math.abs(document.getElementById("width_18").setAttribute('style', 'width:' + span_18 + 'px;'));
-    var width_19 = Math.abs(document.getElementById("width_19").setAttribute('style', 'width:' + span_19 + 'px;'));
-    var width_20 = Math.abs(document.getElementById("width_20").setAttribute('style', 'width:' + span_20 + 'px;'));
-    var width_21 = Math.abs(document.getElementById("width_21").setAttribute('style', 'width:' + span_21 + 'px;'));
-    var width_22 = Math.abs(document.getElementById("width_22").setAttribute('style', 'width:' + span_22 + 'px;'));
-    var width_23 = Math.abs(document.getElementById("width_23").setAttribute('style', 'width:' + span_23 + 'px;'));
+    var width_1 = Math.abs(document.getElementById("width_1").setAttribute('style', 'width:' + span_1 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + height_1 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + height_1 + '; column-width: ' + pgwidth + 'px;'  ));
+    var width_X = Math.abs(document.getElementById("width_2").setAttribute('style', 'width:' + span_2 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + height_2 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + height_2 + '; column-width: ' + pgwidth + 'px;'  ));
+    var width_3 = Math.abs(document.getElementById("width_3").setAttribute('style', 'width:' + span_3 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + height_3 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + height_3 + '; column-width: ' + pgwidth + 'px;'  ));
+    var width_4 = Math.abs(document.getElementById("width_4").setAttribute('style', 'width:' + span_4 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + height_4 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + height_4 + '; column-width: ' + pgwidth + 'px;'  ));
+    var width_5 = Math.abs(document.getElementById("width_5").setAttribute('style', 'width:' + span_5 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + height_5 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + height_5 + '; column-width: ' + pgwidth + 'px;'  ));
+    var width_6 = Math.abs(document.getElementById("width_6").setAttribute('style', 'width:' + span_6 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + height_6 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + height_6 + '; column-width: ' + pgwidth + 'px;'  ));
+    var width_7 = Math.abs(document.getElementById("width_7").setAttribute('style', 'width:' + span_7 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + height_7 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + height_7 + '; column-width: ' + pgwidth + 'px;'  ));
+    var width_8 = Math.abs(document.getElementById("width_8").setAttribute('style', 'width:' + span_8 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + height_8 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + height_8 + '; column-width: ' + pgwidth + 'px;'  ));
+    var width_9 = Math.abs(document.getElementById("width_9").setAttribute('style', 'width:' + span_9 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + height_9 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + height_9 + '; column-width: ' + pgwidth + 'px;'  ));
+    var width_10 = Math.abs(document.getElementById("width_10").setAttribute('style', 'width:' + span_10 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + height_10 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + height_10 + '; column-width: ' + pgwidth + 'px;' ));
+    var width_11 = Math.abs(document.getElementById("width_11").setAttribute('style', 'width:' + span_11 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + height_11 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + height_11 + '; column-width: ' + pgwidth + 'px;' ));
+    var width_12 = Math.abs(document.getElementById("width_12").setAttribute('style', 'width:' + span_12 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + height_12 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + height_12 + '; column-width: ' + pgwidth + 'px;' ));
+    var width_13 = Math.abs(document.getElementById("width_13").setAttribute('style', 'width:' + span_13 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + height_13 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + height_13 + '; column-width: ' + pgwidth + 'px;' ));
+    var width_14 = Math.abs(document.getElementById("width_14").setAttribute('style', 'width:' + span_14 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + height_14 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + height_14 + '; column-width: ' + pgwidth + 'px;' ));
+    var width_15 = Math.abs(document.getElementById("width_15").setAttribute('style', 'width:' + span_15 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + height_15 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + height_15 + '; column-width: ' + pgwidth + 'px;' ));
+    var width_16 = Math.abs(document.getElementById("width_16").setAttribute('style', 'width:' + span_16 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + height_16 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + height_16 + '; column-width: ' + pgwidth + 'px;' ));
+    var width_17 = Math.abs(document.getElementById("width_17").setAttribute('style', 'width:' + span_17 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + height_17 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + height_17 + '; column-width: ' + pgwidth + 'px;' ));
+    var width_18 = Math.abs(document.getElementById("width_18").setAttribute('style', 'width:' + span_18 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + height_18 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + height_18 + '; column-width: ' + pgwidth + 'px;' ));
+    var width_19 = Math.abs(document.getElementById("width_19").setAttribute('style', 'width:' + span_19 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + height_19 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + height_19 + '; column-width: ' + pgwidth + 'px;' ));
+    var width_20 = Math.abs(document.getElementById("width_20").setAttribute('style', 'width:' + span_20 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + height_20 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + height_20 + '; column-width: ' + pgwidth + 'px;' ));
+    var width_21 = Math.abs(document.getElementById("width_21").setAttribute('style', 'width:' + span_21 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + height_21 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + height_21 + '; column-width: ' + pgwidth + 'px;' ));
+    var width_22 = Math.abs(document.getElementById("width_22").setAttribute('style', 'width:' + span_22 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + height_22 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + height_22 + '; column-width: ' + pgwidth + 'px;' ));
+    var width_23 = Math.abs(document.getElementById("width_23").setAttribute('style', 'width:' + span_23 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + height_23 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + height_23 + '; column-width: ' + pgwidth + 'px;' ));
 
 
 
@@ -375,8 +469,8 @@ function start() {
         console.log("pgwidth: " + pgwidth);
         console.log("areaWidth: " + areaWidth);
 
-    getPositionDom(), renderInfoPage(), scrollPages();
-  }, 1000)
+    getPositionDom(), renderInfoPage(), scrollPages(), pagesHeight();
+  }, 2000)
 }
 
 function scrollChapter_1(obj) {   document.getElementById("content").scrollLeft = 0; }
