@@ -848,7 +848,8 @@ h1 strong {
 }
 
 #infopage {
-    display: block;
+    display: inline-flex;
+    width: 104px;
     justify-content: right;
     margin-top: 96px;
     line-height: 32px
