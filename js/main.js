@@ -168,17 +168,17 @@ scroller.addEventListener("scroll", (event) => {
 function showIndex() {
   console.log("- - - - - - - -> INDEX");
   setTimeout(() => {
-    var x = document.getElementById("index");
+    var x = document.getElementById("indexCredits");
     onContentScroll = 0;
     if (x.style.display === "none") {
       console.log("Index - show it");
       x.style.display = "block";
       setTimeout(() => {
-        document.getElementById("index").style.opacity = "1";
+        document.getElementById("indexCredits").style.opacity = "1";
       }, 500);
     } else {
       console.log("Index - hide it");
-      document.getElementById("index").style.opacity = "0";
+      document.getElementById("indexCredits").style.opacity = "0";
       setTimeout(() => {
         x.style.display = "none";
         onContentScroll = 1;
