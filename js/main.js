@@ -1,3 +1,19 @@
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* - - - - - - - - - - Pending Tasks - - - - - - - - - - */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/*
+
+  - Move calculations out the start function
+  - For resizing function create a "delete inline style" function
+  - Create Index of functions
+  - See if it's possible to delete the touch-swipr javascript
+
+*/
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+
+
+
 function showNote(clicked_class) {
   var x = Array.from(document.getElementsByClassName(clicked_class + "_text"));
 
@@ -20,28 +36,54 @@ function closeNote() {
   });
 }
 
-var inner_Height = Math.abs(document.getElementById("inner").clientHeight);
 
-function pagesHeight() {  
-  document.documentElement.style.setProperty(
-    "--inner-height",
-    inner_Height + `px`
-  );
-  console.log("inner_Height: " + inner_Height);
-}
-function resize() {
-  positionZoom(), renderInfoPage(), start();
-}
-window.onresize = resize;
-const appHeight = () => {
-  document.documentElement.style.setProperty(
-    "--app-height",
-    `${window.innerHeight}px`
-  );
-};
-window.addEventListener("resize", appHeight), appHeight(), pagesHeight();
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* - - - - - - - - Resize Browser Window - - - - - - - - */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+  var inner_Height = Math.abs(document.getElementById("inner").clientHeight);
+
+  function pagesHeight() {
+    inner_Height = Math.abs(document.getElementById("inner").clientHeight);
+    document.documentElement.style.setProperty( '--inner-height', inner_Height + 'px' );
+    console.log("inner_Height: " + inner_Height);
+  }
+
+  pagesHeight();
+
+  const appHeight = () => {
+    document.documentElement.style.setProperty(
+      "--app-height",
+      `${window.innerHeight}px`
+    );
+  };
+  var onResize = false;
+
+  function resize() {
+    console.log("- - - - - - - - Resize Function");
+    pagesHeight(), positionZoom(), start(), renderInfoPage();
+  }
+
+  /* window.onresize = resize; */
+
+  window.addEventListener("resize", function() {
+    if (!onResize) {
+      console.log("- - - - - - - - Window Resize Event");
+      removeStyleChapters();
+      onResize = true;
+      setTimeout(() => {
+        resize();
+        setTimeout(() => {
+          onResize = false;
+        }, 1000);
+      }, 500);
+    }
+  });
 
 
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* - - - - - - - - Javascript Variables  - - - - - - - - */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 var root = document.querySelector(":root"),
     root_var = getComputedStyle(root),
@@ -92,7 +134,7 @@ function scrollPages(min, max) {
       renderInfoPage();
       document.getElementById("content").scrollLeft = (pageCur - 1) * pgwidth;
     }
-  }, 500);
+  }, 400);
 }
 
 
@@ -105,7 +147,7 @@ function pagesMove() {
     console.log(" - - - - - - - - CONTENT CLICKED");
     setTimeout(() => {
       scrollPages();
-    }, 600);
+    }, 200);
   }
 }
 
@@ -287,6 +329,9 @@ function start() {
     var t = document.getElementById("inner"); 
         t.addEventListener("swiped-left", prev),
         t.addEventListener("swiped-right", prev);
+
+    pgwidth = pagina.width();
+    
     
 
         var pages_chapter_1 = Math.ceil( Math.abs(document.getElementById("chapter_1").clientHeight) / inner_Height );
@@ -439,7 +484,7 @@ function start() {
         console.log("pgwidth: " + pgwidth);
         console.log("areaWidth: " + areaWidth);
 
-    getPositionDom(), renderInfoPage(), pagesHeight();
+    getPositionDom(), renderInfoPage();
   }, 2000)
 }
 
@@ -495,6 +540,40 @@ function scrollChapter_20(obj) {  scroll_20 = document.getElementById("chapter_2
 function scrollChapter_21(obj) {  scroll_21 = document.getElementById("chapter_21").offsetLeft; document.getElementById("content").scrollLeft = scroll_21; pageCur = Math.ceil(scroll_21 / pgwidth) + 1; renderInfoPage(); }
 function scrollChapter_22(obj) {  scroll_22 = document.getElementById("chapter_22").offsetLeft; document.getElementById("content").scrollLeft = scroll_22; pageCur = Math.ceil(scroll_22 / pgwidth) + 1; renderInfoPage(); }
 function scrollChapter_23(obj) {  scroll_23 = document.getElementById("chapter_23").offsetLeft; document.getElementById("content").scrollLeft = scroll_23; pageCur = Math.ceil(scroll_23 / pgwidth) + 1; renderInfoPage(); }
+
+
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* - - - - - - Remove Chapters Inline Styles - - - - - - */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+function removeStyleChapters() {
+    var remove_chapter_1 = document.getElementById("chapter_1").removeAttribute("style");
+    var remove_chapter_2 = document.getElementById("chapter_2").removeAttribute("style");
+    var remove_chapter_3 = document.getElementById("chapter_3").removeAttribute("style");
+    var remove_chapter_4 = document.getElementById("chapter_4").removeAttribute("style");
+    var remove_chapter_5 = document.getElementById("chapter_5").removeAttribute("style");
+    var remove_chapter_6 = document.getElementById("chapter_6").removeAttribute("style");
+    var remove_chapter_7 = document.getElementById("chapter_7").removeAttribute("style");
+    var remove_chapter_8 = document.getElementById("chapter_8").removeAttribute("style");
+    var remove_chapter_9 = document.getElementById("chapter_9").removeAttribute("style");
+    var remove_chapter_10 = document.getElementById("chapter_10").removeAttribute("style");
+    var remove_chapter_11 = document.getElementById("chapter_11").removeAttribute("style");
+    var remove_chapter_12 = document.getElementById("chapter_12").removeAttribute("style");
+    var remove_chapter_13 = document.getElementById("chapter_13").removeAttribute("style");
+    var remove_chapter_14 = document.getElementById("chapter_14").removeAttribute("style");
+    var remove_chapter_15 = document.getElementById("chapter_15").removeAttribute("style");
+    var remove_chapter_16 = document.getElementById("chapter_16").removeAttribute("style");
+    var remove_chapter_17 = document.getElementById("chapter_17").removeAttribute("style");
+    var remove_chapter_18 = document.getElementById("chapter_18").removeAttribute("style");
+    var remove_chapter_19 = document.getElementById("chapter_19").removeAttribute("style");
+    var remove_chapter_20 = document.getElementById("chapter_20").removeAttribute("style");
+    var remove_chapter_21 = document.getElementById("chapter_21").removeAttribute("style");
+    var remove_chapter_22 = document.getElementById("chapter_22").removeAttribute("style");
+    var remove_chapter_23 = document.getElementById("chapter_23").removeAttribute("style");
+
+
+}
 
 
 
