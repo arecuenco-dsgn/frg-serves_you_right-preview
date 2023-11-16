@@ -753,6 +753,14 @@ h1 strong {
     background-color: hsl(0deg 0% 0% / 60%)
 }
 
+#resize_screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 100;
+}
+
 #grid_index {
     display: grid;
     grid-template-columns: auto 80vw auto;
@@ -1070,7 +1078,7 @@ h1 strong {
     padding-left: 56px;
 }
 
-#inner article .dialog, #inner article .paragraph, #inner article span {
+#inner article h1, #inner article .dialog, #inner article .paragraph, #inner article span {
     width: var(--ancho-pagina);
     scroll-snap-align: start;
 }
@@ -1245,7 +1253,11 @@ h1 strong {
     }
 
     #infopage {
-        margin-top: 143px;
+        margin-top: 0px;
+        position: absolute;
+        top: 40px;
+        left: calc(8vw + 12px);
+        justify-content: start;
     }
 
     #infopage span {
@@ -1256,6 +1268,12 @@ h1 strong {
 @media (max-width: 760px) {
     :root {
         --ancho-pagina:520px
+    }
+    #inner article h1, #inner article .paragraph, #inner article .dialog, #inner article span {
+        padding-right: 32px;
+    }
+    #inner article .divisor {
+        margin-right: 32px;
     }
 }
 
@@ -1553,7 +1571,7 @@ h1 strong {
 }
 @media (max-width: 520px) {
     :root {
-        --ancho-pagina:342px;
+        --ancho-pagina: 80vw;
         --gap: 0px;
         --cap-mt: 56px;
         --cap-mb: 64px

@@ -166,6 +166,29 @@ function pagesMove() {
 
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* - - - - - - - - -  Resizing Book  - - - - - - - - - - */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+function resizingBookScreen() {
+    var x = document.getElementById("resize_screen");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+      setTimeout(() => {
+        x.style.opacity = "1";
+      }, 0);
+    } else {
+      setTimeout(() => {
+        x.style.opacity = "0";
+        setTimeout(() => {
+          x.style.display = "none";
+        }, 200);
+      }, 800);
+    }
+}
+
+
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 /* - - - - - - - - Resize Browser Window - - - - - - - - */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
@@ -194,31 +217,22 @@ function pagesMove() {
     }, 2000);
   }
 
-  /* window.onresize = resize; */
-
   window.addEventListener("resize", function() {
     if (!onResize) {
       console.log("- - - - - - - - Window Resize Event");
       removeStyleChapters();
+      resizingBookScreen();
       onResize = true;
       setTimeout(() => {
         resize();
         setTimeout(() => {
           onResize = false;
+          resizingBookScreen();
         }, 1000);
       }, 500);
     }
   });
 
-
-/*
-scroller.addEventListener("scroll", (event) => {
-    setTimeout(() => {
-    console.log(" ...... SCROLLING");
-      scrollPages();
-    }, 1800);
-});
-*/
 
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
