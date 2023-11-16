@@ -325,6 +325,9 @@ h1 strong {
     width: 100vw;
     height: 100dvh;
     top: 0px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 #credits {
     position: relative;
@@ -1037,7 +1040,9 @@ h1 strong {
     flex-direction: row;
     width: fit-content;
 }
-
+#inner * {
+    position: relative;
+}
 #inner article {
     min-width: max-content;
     display: block;
@@ -1050,26 +1055,18 @@ h1 strong {
 
 #inner article * {
     scroll-snap-align: start;
+    box-sizing: border-box;
 }
-
-
-/*
-#inner article:nth-child(odd) {
-    background-color: coral;
-}
-#inner article:nth-child(even) {
-    background-color: cornflowerblue;
-} */
 
 #inner article h1{
-    width: calc(var(--ancho-pagina) - 48px);
+    /* width: calc(var(--ancho-pagina) - 48px); */
     padding-right: 48px;
 }
 #inner article .paragraph {
-    padding-right: calc(var(--ancho-pagina) - var(--text-width));
+    /* padding-right: calc(var(--ancho-pagina) - var(--text-width)); */
 }
 #inner article .dialog {
-    padding-right: calc(var(--ancho-pagina) - var(--text-width));
+    /* padding-right: calc(var(--ancho-pagina) - var(--text-width)); */
     padding-left: 56px;
 }
 
@@ -1078,9 +1075,7 @@ h1 strong {
     scroll-snap-align: start;
 }
 
-#inner * {
-    position: relative;
-}
+
 
 .definition_box {
     page-break-inside: avoid
@@ -1146,14 +1141,17 @@ h1 strong {
 
 @media (max-width: 1280px),(max-height:1040px) {
     #grid_index {
-        grid-template-rows:12vh auto 12vh
+        grid-template-rows:20vh auto 20vh;
     }
 }
 
 @media (max-height: 880px) {
     #grid_index {
-        grid-template-rows:22vh auto 20vh
+        grid-template-rows:auto auto auto;
     }
+    #grid_index .grid_item_02 {
+        align-items: center;
+      }
     .credits_text {
         font-size: 14px;
         line-height: 20px;
@@ -1185,6 +1183,13 @@ h1 strong {
 
     .card_shadow {
         display: none
+    }
+    .index_row a:hover .card_text {
+        transition: none;
+        transform: none;
+        background-color: var(--black-deep);
+        color: var(--white);
+        z-index: initial
     }
 
     #grid_index {
@@ -1348,14 +1353,6 @@ h1 strong {
         line-height: 1.5;
         display: inline-block;
         vertical-align: middle
-    }
-
-    .index_row a:hover .card_text {
-        transition: none;
-        transform: none;
-        background-color: var(--black-deep);
-        color: var(--white);
-        z-index: initial
     }
 
     #index_flex:hover .icon {

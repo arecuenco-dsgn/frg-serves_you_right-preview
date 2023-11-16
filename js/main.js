@@ -3,15 +3,95 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 /*
 
-  - Move calculations out the start function
-  - For resizing function create a "delete inline style" function
+  - ⛔️ Move calculations out the start function
+  - ✅ - For resizing function create a "delete inline style" function
+  - ✅ - See if it's possible to delete the touch-swipr javascript
+  - ✅ - Finetune Index Responsiveness (Scroll & Grid)
+  - Show "Adjusting" modal when resizing the window
   - Create Index of functions
-  - See if it's possible to delete the touch-swipr javascript
+
 
 */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* - - - - - - - - Javascript Variables  - - - - - - - - */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+var root = document.querySelector(":root"),
+    root_var = getComputedStyle(root),
+    get_gap = root_var.getPropertyValue("--gap");
+var lastPage,
+    wordsPage,
+    posSpan,
+    cntWidth,
+    innerPages,
+    pageTot,
+    pageCur,
+    pagina = $("#content"),
+    pgwidth = pagina.width(),
+    gap = parseInt(get_gap),
+    areaWidth = Math.round(pgwidth),
+    columnWidth = pgwidth - gap,
+    animDuration = 400,
+    contentPos = document.getElementById("content").scrollLeft,
+    onContentScroll = 0,
+    inner_Height = Math.abs(document.getElementById("inner").clientHeight);
+var pages_chapter_1,
+    pages_chapter_2,
+    pages_chapter_3,
+    pages_chapter_4,
+    pages_chapter_5,
+    pages_chapter_6,
+    pages_chapter_7,
+    pages_chapter_8,
+    pages_chapter_9,
+    pages_chapter_10,
+    pages_chapter_11,
+    pages_chapter_12,
+    pages_chapter_13,
+    pages_chapter_14,
+    pages_chapter_15,
+    pages_chapter_16,
+    pages_chapter_17,
+    pages_chapter_18,
+    pages_chapter_19,
+    pages_chapter_20,
+    pages_chapter_21,
+    pages_chapter_22,
+    pages_chapter_23;
+var span_1,
+    span_2,
+    span_3,
+    span_4,
+    span_5,
+    span_6,
+    span_7,
+    span_8,
+    span_9,
+    span_10,
+    span_11,
+    span_12,
+    span_13,
+    span_14,
+    span_15,
+    span_16,
+    span_17,
+    span_18,
+    span_19,
+    span_20,
+    span_21,
+    span_22,
+    span_23,
+    chaptersSUM,
+    pageTot_SUM;
+
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* - - - - - - - -  Show Chapters Notes  - - - - - - - - */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 
 function showNote(clicked_class) {
@@ -35,75 +115,6 @@ function closeNote() {
     clicked_class.style.display = "none";
   });
 }
-
-
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-/* - - - - - - - - Resize Browser Window - - - - - - - - */
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-
-  var inner_Height = Math.abs(document.getElementById("inner").clientHeight);
-
-  function pagesHeight() {
-    inner_Height = Math.abs(document.getElementById("inner").clientHeight);
-    document.documentElement.style.setProperty( '--inner-height', inner_Height + 'px' );
-    console.log("inner_Height: " + inner_Height);
-  }
-
-  pagesHeight();
-
-  const appHeight = () => {
-    document.documentElement.style.setProperty(
-      "--app-height",
-      `${window.innerHeight}px`
-    );
-  };
-  var onResize = false;
-
-  function resize() {
-    console.log("- - - - - - - - Resize Function");
-    pagesHeight(), positionZoom(), start(), renderInfoPage();
-  }
-
-  /* window.onresize = resize; */
-
-  window.addEventListener("resize", function() {
-    if (!onResize) {
-      console.log("- - - - - - - - Window Resize Event");
-      removeStyleChapters();
-      onResize = true;
-      setTimeout(() => {
-        resize();
-        setTimeout(() => {
-          onResize = false;
-        }, 1000);
-      }, 500);
-    }
-  });
-
-
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-/* - - - - - - - - Javascript Variables  - - - - - - - - */
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-
-var root = document.querySelector(":root"),
-    root_var = getComputedStyle(root),
-    get_gap = root_var.getPropertyValue("--gap");
-var lastPage,
-    wordsPage,
-    posSpan,
-    cntWidth,
-    innerPages,
-    pageTot,
-    pageCur,
-    pagina = $("#content"),
-    pgwidth = pagina.width(),
-    gap = parseInt(get_gap),
-    areaWidth = Math.round(pgwidth),
-    columnWidth = pgwidth - gap,
-    animDuration = 400,
-    contentPos = document.getElementById("content").scrollLeft;
-    onContentScroll = 0;
-
 
 
 
@@ -138,6 +149,7 @@ function scrollPages(min, max) {
 }
 
 
+
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 /* - - - Clicked On Content to Launch ScrollPages  - - - */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -150,6 +162,54 @@ function pagesMove() {
     }, 200);
   }
 }
+
+
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* - - - - - - - - Resize Browser Window - - - - - - - - */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+  function pagesHeight() {
+    inner_Height = Math.abs(document.getElementById("inner").clientHeight);
+    document.documentElement.style.setProperty( '--inner-height', inner_Height + 'px' );
+    console.log("inner_Height: " + inner_Height);
+  }
+
+  pagesHeight();
+
+  const appHeight = () => {
+    document.documentElement.style.setProperty(
+      "--app-height",
+      `${window.innerHeight}px`
+    );
+  };
+  var onResize = false;
+
+  function resize() {
+    console.log("- - - - - - - - Resize Function");
+    pagesHeight(), positionZoom(), start(), renderInfoPage();
+    setTimeout(() => {
+      console.log("- - - - - - - - Set Timeout Resize");
+      scrollPages();
+    }, 2000);
+  }
+
+  /* window.onresize = resize; */
+
+  window.addEventListener("resize", function() {
+    if (!onResize) {
+      console.log("- - - - - - - - Window Resize Event");
+      removeStyleChapters();
+      onResize = true;
+      setTimeout(() => {
+        resize();
+        setTimeout(() => {
+          onResize = false;
+        }, 1000);
+      }, 500);
+    }
+  });
+
 
 /*
 scroller.addEventListener("scroll", (event) => {
@@ -316,6 +376,7 @@ function prev() {
 }
 
 
+
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 /* - - - - - - - - -   START FUNCTION  - - - - - - - - - */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -331,112 +392,55 @@ function start() {
         t.addEventListener("swiped-right", prev);
 
     pgwidth = pagina.width();
-    
-    
 
-        var pages_chapter_1 = Math.ceil( Math.abs(document.getElementById("chapter_1").clientHeight) / inner_Height );
-        console.log("pages_chapter_1: " + pages_chapter_1);
-        var pages_chapter_2 = Math.ceil( Math.abs(document.getElementById("chapter_2").clientHeight) / inner_Height );
-        console.log("pages_chapter_2: " + pages_chapter_2);
-        var pages_chapter_3 = Math.ceil( Math.abs(document.getElementById("chapter_3").clientHeight) / inner_Height );
-        console.log("pages_chapter_3: " + pages_chapter_3);
-        var pages_chapter_4 = Math.ceil( Math.abs(document.getElementById("chapter_4").clientHeight) / inner_Height );
-        console.log("pages_chapter_4: " + pages_chapter_4);
-        var pages_chapter_5 = Math.ceil( Math.abs(document.getElementById("chapter_5").clientHeight) / inner_Height );
-        console.log("pages_chapter_5: " + pages_chapter_5);
-        var pages_chapter_6 = Math.ceil( Math.abs(document.getElementById("chapter_6").clientHeight) / inner_Height );
-        console.log("pages_chapter_6: " + pages_chapter_6);
-        var pages_chapter_7 = Math.ceil( Math.abs(document.getElementById("chapter_7").clientHeight) / inner_Height );
-        console.log("pages_chapter_7: " + pages_chapter_7);
-        var pages_chapter_8 = Math.ceil( Math.abs(document.getElementById("chapter_8").clientHeight) / inner_Height );
-        console.log("pages_chapter_8: " + pages_chapter_8);
-        var pages_chapter_9 = Math.ceil( Math.abs(document.getElementById("chapter_9").clientHeight) / inner_Height );
-        console.log("pages_chapter_9: " + pages_chapter_9);
-        var pages_chapter_10 = Math.ceil( Math.abs(document.getElementById("chapter_10").clientHeight) / inner_Height );
-        console.log("pages_chapter_10: " + pages_chapter_10);
-        var pages_chapter_11 = Math.ceil( Math.abs(document.getElementById("chapter_11").clientHeight) / inner_Height );
-        console.log("pages_chapter_11: " + pages_chapter_11);
-        var pages_chapter_12 = Math.ceil( Math.abs(document.getElementById("chapter_12").clientHeight) / inner_Height );
-        console.log("pages_chapter_12: " + pages_chapter_12);
-        var pages_chapter_13 = Math.ceil( Math.abs(document.getElementById("chapter_13").clientHeight) / inner_Height );
-        console.log("pages_chapter_13: " + pages_chapter_13);
-        var pages_chapter_14 = Math.ceil( Math.abs(document.getElementById("chapter_14").clientHeight) / inner_Height );
-        console.log("pages_chapter_14: " + pages_chapter_14);
-        var pages_chapter_15 = Math.ceil( Math.abs(document.getElementById("chapter_15").clientHeight) / inner_Height );
-        console.log("pages_chapter_15: " + pages_chapter_15);
-        var pages_chapter_16 = Math.ceil( Math.abs(document.getElementById("chapter_16").clientHeight) / inner_Height );
-        console.log("pages_chapter_16: " + pages_chapter_16);
-        var pages_chapter_17 = Math.ceil( Math.abs(document.getElementById("chapter_17").clientHeight) / inner_Height );
-        console.log("pages_chapter_17: " + pages_chapter_17);
-        var pages_chapter_18 = Math.ceil( Math.abs(document.getElementById("chapter_18").clientHeight) / inner_Height );
-        console.log("pages_chapter_18: " + pages_chapter_18);
-        var pages_chapter_19 = Math.ceil( Math.abs(document.getElementById("chapter_19").clientHeight) / inner_Height );
-        console.log("pages_chapter_19: " + pages_chapter_19);
-        var pages_chapter_20 = Math.ceil( Math.abs(document.getElementById("chapter_20").clientHeight) / inner_Height );
-        console.log("pages_chapter_20: " + pages_chapter_20);
-        var pages_chapter_21 = Math.ceil( Math.abs(document.getElementById("chapter_21").clientHeight) / inner_Height );
-        console.log("pages_chapter_21: " + pages_chapter_21);
-        var pages_chapter_22 = Math.ceil( Math.abs(document.getElementById("chapter_22").clientHeight) / inner_Height );
-        console.log("pages_chapter_22: " + pages_chapter_22);
-        var pages_chapter_23 = Math.ceil( Math.abs(document.getElementById("chapter_23").clientHeight) / inner_Height );
-        console.log("pages_chapter_23: " + pages_chapter_23);
+    pages_chapter_1 = Math.ceil( Math.abs(document.getElementById("chapter_1").clientHeight) / inner_Height );
+    pages_chapter_2 = Math.ceil( Math.abs(document.getElementById("chapter_2").clientHeight) / inner_Height );
+    pages_chapter_3 = Math.ceil( Math.abs(document.getElementById("chapter_3").clientHeight) / inner_Height );
+    pages_chapter_4 = Math.ceil( Math.abs(document.getElementById("chapter_4").clientHeight) / inner_Height );
+    pages_chapter_5 = Math.ceil( Math.abs(document.getElementById("chapter_5").clientHeight) / inner_Height );
+    pages_chapter_6 = Math.ceil( Math.abs(document.getElementById("chapter_6").clientHeight) / inner_Height );
+    pages_chapter_7 = Math.ceil( Math.abs(document.getElementById("chapter_7").clientHeight) / inner_Height );
+    pages_chapter_8 = Math.ceil( Math.abs(document.getElementById("chapter_8").clientHeight) / inner_Height );
+    pages_chapter_9 = Math.ceil( Math.abs(document.getElementById("chapter_9").clientHeight) / inner_Height );
+    pages_chapter_10 = Math.ceil( Math.abs(document.getElementById("chapter_10").clientHeight) / inner_Height );
+    pages_chapter_11 = Math.ceil( Math.abs(document.getElementById("chapter_11").clientHeight) / inner_Height );
+    pages_chapter_12 = Math.ceil( Math.abs(document.getElementById("chapter_12").clientHeight) / inner_Height );
+    pages_chapter_13 = Math.ceil( Math.abs(document.getElementById("chapter_13").clientHeight) / inner_Height );
+    pages_chapter_14 = Math.ceil( Math.abs(document.getElementById("chapter_14").clientHeight) / inner_Height );
+    pages_chapter_15 = Math.ceil( Math.abs(document.getElementById("chapter_15").clientHeight) / inner_Height );
+    pages_chapter_16 = Math.ceil( Math.abs(document.getElementById("chapter_16").clientHeight) / inner_Height );
+    pages_chapter_17 = Math.ceil( Math.abs(document.getElementById("chapter_17").clientHeight) / inner_Height );
+    pages_chapter_18 = Math.ceil( Math.abs(document.getElementById("chapter_18").clientHeight) / inner_Height );
+    pages_chapter_19 = Math.ceil( Math.abs(document.getElementById("chapter_19").clientHeight) / inner_Height );
+    pages_chapter_20 = Math.ceil( Math.abs(document.getElementById("chapter_20").clientHeight) / inner_Height );
+    pages_chapter_21 = Math.ceil( Math.abs(document.getElementById("chapter_21").clientHeight) / inner_Height );
+    pages_chapter_22 = Math.ceil( Math.abs(document.getElementById("chapter_22").clientHeight) / inner_Height );
+    pages_chapter_23 = Math.ceil( Math.abs(document.getElementById("chapter_23").clientHeight) / inner_Height );
 
-
-    
-    var span_1 = Math.abs(pages_chapter_1 * pgwidth);
-    console.log("span_1: " + span_1);
-    var span_2 = Math.abs(pages_chapter_2 * pgwidth);
-    console.log("span_2: " + span_2);
-    var span_3 = Math.abs(pages_chapter_3 * pgwidth);
-    console.log("span_3: " + span_3);
-    var span_4 = Math.abs(pages_chapter_4 * pgwidth);
-    console.log("span_4: " + span_4);
-    var span_5 = Math.abs(pages_chapter_5 * pgwidth);
-    console.log("span_5: " + span_5);
-    var span_6 = Math.abs(pages_chapter_6 * pgwidth);
-    console.log("span_6: " + span_6);
-    var span_7 = Math.abs(pages_chapter_7 * pgwidth);
-    console.log("span_7: " + span_7);
-    var span_8 = Math.abs(pages_chapter_8 * pgwidth);
-    console.log("span_8: " + span_8);
-    var span_9 = Math.abs(pages_chapter_9 * pgwidth);
-    console.log("span_9: " + span_9);
-    var span_10 = Math.abs(pages_chapter_10 * pgwidth);
-    console.log("span_10: " + span_10);
-    var span_11 = Math.abs(pages_chapter_11 * pgwidth);
-    console.log("span_11: " + span_11);
-    var span_12 = Math.abs(pages_chapter_12 * pgwidth);
-    console.log("span_12: " + span_12);
-    var span_13 = Math.abs(pages_chapter_13 * pgwidth);
-    console.log("span_13: " + span_13);
-    var span_14 = Math.abs(pages_chapter_14 * pgwidth);
-    console.log("span_14: " + span_14);
-    var span_15 = Math.abs(pages_chapter_15 * pgwidth);
-    console.log("span_15: " + span_15);
-    var span_16 = Math.abs(pages_chapter_16 * pgwidth);
-    console.log("span_16: " + span_16);
-    var span_17 = Math.abs(pages_chapter_17 * pgwidth);
-    console.log("span_17: " + span_17);
-    var span_18 = Math.abs(pages_chapter_18 * pgwidth);
-    console.log("span_18: " + span_18);
-    var span_19 = Math.abs(pages_chapter_19 * pgwidth);
-    console.log("span_19: " + span_19);
-    var span_20 = Math.abs(pages_chapter_20 * pgwidth);
-    console.log("span_20: " + span_20);
-    var span_21 = Math.abs(pages_chapter_21 * pgwidth);
-    console.log("span_21: " + span_21);
-    var span_22 = Math.abs(pages_chapter_22 * pgwidth);
-    console.log("span_22: " + span_22);
-    var span_23 = Math.abs(pages_chapter_23 * pgwidth);
-    console.log("span_23: " + span_23);
-
-    var chaptersSUM = span_1 + span_2 + span_3 + span_4 + span_5 + span_6 + span_7 + span_8 + span_9 + span_10 + span_11 + span_12 + span_13 + span_14 + span_15 + span_16 + span_17 + span_18 + span_19 + span_20 + span_21 + span_22 + span_23;         
-    
-    console.log("Chapters SUM: " + chaptersSUM);
-
-    
-
-    console.log(" - - - - - - - - * - - - - - - - - ");
+    span_1 = Math.abs(pages_chapter_1 * pgwidth);
+    span_2 = Math.abs(pages_chapter_2 * pgwidth);
+    span_3 = Math.abs(pages_chapter_3 * pgwidth);
+    span_4 = Math.abs(pages_chapter_4 * pgwidth);
+    span_5 = Math.abs(pages_chapter_5 * pgwidth);
+    span_6 = Math.abs(pages_chapter_6 * pgwidth);
+    span_7 = Math.abs(pages_chapter_7 * pgwidth);
+    span_8 = Math.abs(pages_chapter_8 * pgwidth);
+    span_9 = Math.abs(pages_chapter_9 * pgwidth);
+    span_10 = Math.abs(pages_chapter_10 * pgwidth);
+    span_11 = Math.abs(pages_chapter_11 * pgwidth);
+    span_12 = Math.abs(pages_chapter_12 * pgwidth);
+    span_13 = Math.abs(pages_chapter_13 * pgwidth);
+    span_14 = Math.abs(pages_chapter_14 * pgwidth);
+    span_15 = Math.abs(pages_chapter_15 * pgwidth);
+    span_16 = Math.abs(pages_chapter_16 * pgwidth);
+    span_17 = Math.abs(pages_chapter_17 * pgwidth);
+    span_18 = Math.abs(pages_chapter_18 * pgwidth);
+    span_19 = Math.abs(pages_chapter_19 * pgwidth);
+    span_20 = Math.abs(pages_chapter_20 * pgwidth);
+    span_21 = Math.abs(pages_chapter_21 * pgwidth);
+    span_22 = Math.abs(pages_chapter_22 * pgwidth);
+    span_23 = Math.abs(pages_chapter_23 * pgwidth);
+    chaptersSUM = span_1 + span_2 + span_3 + span_4 + span_5 + span_6 + span_7 + span_8 + span_9 + span_10 + span_11 + span_12 + span_13 + span_14 + span_15 + span_16 + span_17 + span_18 + span_19 + span_20 + span_21 + span_22 + span_23;
 
     var css_chapter_1 = Math.abs(document.getElementById("chapter_1").setAttribute('style', 'width:' + span_1 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + pages_chapter_1 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + pages_chapter_1 + '; column-width: ' + pgwidth + 'px;'  ));
     var css_chapter_2 = Math.abs(document.getElementById("chapter_2").setAttribute('style', 'width:' + span_2 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + pages_chapter_2 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + pages_chapter_2 + '; column-width: ' + pgwidth + 'px;'  ));
@@ -462,10 +466,63 @@ function start() {
     var css_chapter_22 = Math.abs(document.getElementById("chapter_22").setAttribute('style', 'width:' + span_22 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + pages_chapter_22 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + pages_chapter_22 + '; column-width: ' + pgwidth + 'px;' ));
     var css_chapter_23 = Math.abs(document.getElementById("chapter_23").setAttribute('style', 'width:' + span_23 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + pages_chapter_23 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + pages_chapter_23 + '; column-width: ' + pgwidth + 'px;' ));
 
-
-
     pageTot_SUM =  Math.floor( (chaptersSUM / pgwidth)  )
+    
+    console.log(" - - - - - - - - PAGES CHAPTER");
+    console.log("pages_chapter_1: " + pages_chapter_1);
+    console.log("pages_chapter_2: " + pages_chapter_2);
+    console.log("pages_chapter_3: " + pages_chapter_3);
+    console.log("pages_chapter_4: " + pages_chapter_4);
+    console.log("pages_chapter_5: " + pages_chapter_5);
+    console.log("pages_chapter_6: " + pages_chapter_6);
+    console.log("pages_chapter_7: " + pages_chapter_7);
+    console.log("pages_chapter_8: " + pages_chapter_8);
+    console.log("pages_chapter_9: " + pages_chapter_9);
+    console.log("pages_chapter_10: " + pages_chapter_10);
+    console.log("pages_chapter_11: " + pages_chapter_11);
+    console.log("pages_chapter_12: " + pages_chapter_12);
+    console.log("pages_chapter_13: " + pages_chapter_13);
+    console.log("pages_chapter_14: " + pages_chapter_14);
+    console.log("pages_chapter_15: " + pages_chapter_15);
+    console.log("pages_chapter_16: " + pages_chapter_16);
+    console.log("pages_chapter_17: " + pages_chapter_17);
+    console.log("pages_chapter_18: " + pages_chapter_18);
+    console.log("pages_chapter_19: " + pages_chapter_19);
+    console.log("pages_chapter_20: " + pages_chapter_20);
+    console.log("pages_chapter_21: " + pages_chapter_21);
+    console.log("pages_chapter_22: " + pages_chapter_22);
+    console.log("pages_chapter_23: " + pages_chapter_23);
+    console.log(" - - - - - - - - * - - - - - - - - ");
+
+    console.log(" - - - - - - - - WIDTH CHAPTERS");
+    console.log("span_1: " + span_1);
+    console.log("span_2: " + span_2);
+    console.log("span_3: " + span_3);
+    console.log("span_4: " + span_4);
+    console.log("span_5: " + span_5);
+    console.log("span_6: " + span_6);
+    console.log("span_7: " + span_7);
+    console.log("span_8: " + span_8);
+    console.log("span_9: " + span_9);
+    console.log("span_10: " + span_10);
+    console.log("span_11: " + span_11);
+    console.log("span_12: " + span_12);
+    console.log("span_13: " + span_13);
+    console.log("span_14: " + span_14);
+    console.log("span_15: " + span_15);
+    console.log("span_16: " + span_16);
+    console.log("span_17: " + span_17);
+    console.log("span_18: " + span_18);
+    console.log("span_19: " + span_19);
+    console.log("span_20: " + span_20);
+    console.log("span_21: " + span_21);
+    console.log("span_22: " + span_22);
+    console.log("span_23: " + span_23);
+    console.log("Chapters SUM: " + chaptersSUM);
+    console.log(" - - - - - - - - * - - - - - - - - ");
+    
     console.log("Pages by SUM: " + pageTot_SUM);
+    console.log(" - - - - - - - - * - - - - - - - - ");
     
 
     var scroller = document.getElementById("content");  
@@ -484,8 +541,8 @@ function start() {
         console.log("pgwidth: " + pgwidth);
         console.log("areaWidth: " + areaWidth);
 
-    getPositionDom(), renderInfoPage();
-  }, 2000)
+        getPositionDom(), renderInfoPage();
+  }, 1000)
 }
 
 
