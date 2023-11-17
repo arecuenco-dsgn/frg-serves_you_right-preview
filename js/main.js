@@ -8,9 +8,9 @@
   - ✅ - See if it's possible to delete the touch-swipr javascript
   - ✅ - Finetune Index Responsiveness (Scroll & Grid)
   - ✅ - Show "Adjusting" Screen when resizing the window
-  - Create Index of functions
   - ✅ - Scroll on Index in Large Desktop
-  - ✅ - Up to 175% zoom need more columns
+  - ✅ - Up to 175% zoom need more columns (Fix Solution to 2 cols)
+  - Create Index of functions
 
 
 */

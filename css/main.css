@@ -828,7 +828,7 @@ h1 strong {
 }
 
 #credits .credits_main .credits_box {
-    height: fit-content;
+    height: 100%;
     position: relative;
     padding-bottom: 64px;
 }
@@ -1186,6 +1186,9 @@ h1 strong {
     }
     .credits_info {
         margin-top: 8%;
+    }
+    #credits .credits_main .credits_box {
+        height: fit-content;
     }
 }
 
