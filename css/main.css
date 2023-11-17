@@ -316,6 +316,7 @@ h1 strong {
     width: 100vw;
     height: 100dvh;
     top: 0px;
+    left: 0px;
 }
 
 
@@ -766,9 +767,10 @@ h1 strong {
     grid-template-columns: auto 80vw auto;
     grid-template-rows: 180px auto 140px;
     grid-gap: 0px;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     width: 100vw;
-    height: 100vh
+    height: 100vh;
 }
 
 #grid_index .grid_items {
@@ -821,6 +823,16 @@ h1 strong {
     padding-top: 12px;
 }
 
+#credits .credits_main {
+    overflow-y: auto;
+}
+
+#credits .credits_main .credits_box {
+    height: fit-content;
+    position: relative;
+    padding-bottom: 64px;
+}
+
 #item_botones {
     padding-right: calc(100% - var(--text-width) - var(--nav-btns-right_padd));
     display: flex;
@@ -837,9 +849,14 @@ h1 strong {
 #item_paginas .btn {
     color: var(--black)
 }
-
+.credits_main #back {
+    color: var(--white-soft);
+}
+.credits_main #item_botones {
+    justify-content: flex-end;
+}
 .credits_main .btn {
-    color: var(--white-soft)
+    color: var(--white-soft);
 }
 
 #back,#infopage,#next,#prev,a {
@@ -1135,7 +1152,9 @@ h1 strong {
         grid-template-rows: 14vh auto 8vh;
         grid-template-columns: auto 100vw auto
     }
-
+    #grid_index #header {
+        min-height: 80px;
+    }
     #grid_index h1 {
         font-size: 40px;
         line-height: .85em
@@ -1150,6 +1169,7 @@ h1 strong {
 @media (max-width: 1280px),(max-height:1040px) {
     #grid_index {
         grid-template-rows:20vh auto 20vh;
+        grid-row-gap: 20px;
     }
 }
 
@@ -1205,16 +1225,17 @@ h1 strong {
         grid-template-rows: 144px auto 112px;
         overflow-y: visible;
         height: var(--app-height);
-        width: calc(100% + 4px)
+        width: calc(100% + 4px);
+        border: solid 4px var(--black);
     }
 
     #grid_index .grid_item_02 {
-        align-items: center;
+        align-items: end;
         padding-top: 24px
     }
 
     #grid_index .grid_item_02 #header {
-        position: fixed;
+        position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -1301,7 +1322,7 @@ h1 strong {
     }
 
     #grid_index,.bg-noise_center,.bg-noise_center_2,.bg-noise_right {
-        border: none
+        border: solid 4px var(--black);
     }
 
     #grid_index {
@@ -1314,14 +1335,15 @@ h1 strong {
     }
 
     #grid_index .grid_item_02 #header {
-        width: calc(100% - 8px);
+        width: 100%;
         height: 56px;
         justify-content: space-between;
         background-color: var(--black);
         box-sizing: border-box;
         padding: 4px 12px 0 8px;
         flex-direction: row;
-        gap: auto
+        align-items: end;
+        gap: auto;
     }
 
     #header h1 {

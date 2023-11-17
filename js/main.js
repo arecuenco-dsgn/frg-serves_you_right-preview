@@ -7,8 +7,10 @@
   - ✅ - For resizing function create a "delete inline style" function
   - ✅ - See if it's possible to delete the touch-swipr javascript
   - ✅ - Finetune Index Responsiveness (Scroll & Grid)
-  - Show "Adjusting" modal when resizing the window
+  - ✅ - Show "Adjusting" Screen when resizing the window
   - Create Index of functions
+  - ✅ - Scroll on Index in Large Desktop
+  - ✅ - Up to 175% zoom need more columns
 
 
 */
@@ -87,6 +89,18 @@ var span_1,
     span_23,
     chaptersSUM,
     pageTot_SUM;
+var zoom = ((window.outerWidth - 10) / window.innerWidth) * 100;
+
+var controlPress,
+    commandPress,
+    plusPress,
+    minusPress,
+    zoomStep = 1,
+    columnsZoom = 2;
+
+
+
+console.log("zoom: " + zoom);
 
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -129,10 +143,7 @@ function scrollPages(min, max) {
     if (scrollSwicth == 1) {
       contentPos = document.getElementById("content").scrollLeft;
 
-      console.log(" - - - - - - - - SCROLL");
       pageCalc = (contentPos / areaWidth) + 1;
-      console.log("contentPos: " + contentPos);
-      console.log("pageCalc: " + pageCalc);
       
       
       const MIN = min ?? 1;
@@ -140,8 +151,15 @@ function scrollPages(min, max) {
       roundingCalc = Math.floor(pageCalc);
       parsed = parseInt(roundingCalc);
       pageCur = Math.min(Math.max(parsed, MIN), MAX);
-      
-      console.log("pageCur: " + pageCur);
+
+
+      console.log(    '\n', "- - - - - - - - - - - -", 
+                      '\n', "SCROLL",
+                      '\n', "- - - - - - - - - - - -", 
+                      '\n', "contentPos: " + contentPos,
+                      '\n', "pageCur: " + pageCur),
+                      '\n', " ";
+
       renderInfoPage();
       document.getElementById("content").scrollLeft = (pageCur - 1) * pgwidth;
     }
@@ -289,8 +307,10 @@ function showCredits() {
 var innerStart = Math.ceil(Math.abs(document.getElementById("inner").getBoundingClientRect().left));
 
 
-console.log(" - - - - - - - - * - - - - - - - - ");
 
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* - - - - - - - - -  Position Zoom  - - - - - - - - - - */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 
 function positionZoom() {
@@ -313,7 +333,6 @@ function getPositionDom() {
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 function renderInfoPage() {
-  console.log(" - - - - - - - - renderInfoPage");
   $("#infopage").html(pageCur + "  <span>/</span>  " + pageTot_SUM);
 }
 
@@ -397,7 +416,6 @@ function prev() {
 
 function start() {
   setTimeout(() => {
-    console.log(" - - - - - - - - START");
     var e = document.getElementById("prev"); e.addEventListener("click", prev),
         (e = document.getElementById("next")).addEventListener("click", next);
     
@@ -407,29 +425,29 @@ function start() {
 
     pgwidth = pagina.width();
 
-    pages_chapter_1 = Math.ceil( Math.abs(document.getElementById("chapter_1").clientHeight) / inner_Height ) + 1;
-    pages_chapter_2 = Math.ceil( Math.abs(document.getElementById("chapter_2").clientHeight) / inner_Height ) + 1;
-    pages_chapter_3 = Math.ceil( Math.abs(document.getElementById("chapter_3").clientHeight) / inner_Height ) + 1;
-    pages_chapter_4 = Math.ceil( Math.abs(document.getElementById("chapter_4").clientHeight) / inner_Height ) + 1;
-    pages_chapter_5 = Math.ceil( Math.abs(document.getElementById("chapter_5").clientHeight) / inner_Height ) + 1;
-    pages_chapter_6 = Math.ceil( Math.abs(document.getElementById("chapter_6").clientHeight) / inner_Height ) + 1;
-    pages_chapter_7 = Math.ceil( Math.abs(document.getElementById("chapter_7").clientHeight) / inner_Height ) + 1;
-    pages_chapter_8 = Math.ceil( Math.abs(document.getElementById("chapter_8").clientHeight) / inner_Height ) + 1;
-    pages_chapter_9 = Math.ceil( Math.abs(document.getElementById("chapter_9").clientHeight) / inner_Height ) + 1;
-    pages_chapter_10 = Math.ceil( Math.abs(document.getElementById("chapter_10").clientHeight) / inner_Height ) + 1;
-    pages_chapter_11 = Math.ceil( Math.abs(document.getElementById("chapter_11").clientHeight) / inner_Height ) + 1;
-    pages_chapter_12 = Math.ceil( Math.abs(document.getElementById("chapter_12").clientHeight) / inner_Height ) + 1;
-    pages_chapter_13 = Math.ceil( Math.abs(document.getElementById("chapter_13").clientHeight) / inner_Height ) + 1;
-    pages_chapter_14 = Math.ceil( Math.abs(document.getElementById("chapter_14").clientHeight) / inner_Height ) + 1;
-    pages_chapter_15 = Math.ceil( Math.abs(document.getElementById("chapter_15").clientHeight) / inner_Height ) + 1;
-    pages_chapter_16 = Math.ceil( Math.abs(document.getElementById("chapter_16").clientHeight) / inner_Height ) + 1;
-    pages_chapter_17 = Math.ceil( Math.abs(document.getElementById("chapter_17").clientHeight) / inner_Height ) + 1;
-    pages_chapter_18 = Math.ceil( Math.abs(document.getElementById("chapter_18").clientHeight) / inner_Height ) + 1;
-    pages_chapter_19 = Math.ceil( Math.abs(document.getElementById("chapter_19").clientHeight) / inner_Height ) + 1;
-    pages_chapter_20 = Math.ceil( Math.abs(document.getElementById("chapter_20").clientHeight) / inner_Height ) + 1;
-    pages_chapter_21 = Math.ceil( Math.abs(document.getElementById("chapter_21").clientHeight) / inner_Height ) + 1;
-    pages_chapter_22 = Math.ceil( Math.abs(document.getElementById("chapter_22").clientHeight) / inner_Height ) + 1;
-    pages_chapter_23 = Math.ceil( Math.abs(document.getElementById("chapter_23").clientHeight) / inner_Height ) + 1;
+    pages_chapter_1 = Math.ceil( Math.abs(document.getElementById("chapter_1").clientHeight) / inner_Height ) + columnsZoom;
+    pages_chapter_2 = Math.ceil( Math.abs(document.getElementById("chapter_2").clientHeight) / inner_Height ) + columnsZoom;
+    pages_chapter_3 = Math.ceil( Math.abs(document.getElementById("chapter_3").clientHeight) / inner_Height ) + columnsZoom;
+    pages_chapter_4 = Math.ceil( Math.abs(document.getElementById("chapter_4").clientHeight) / inner_Height ) + columnsZoom;
+    pages_chapter_5 = Math.ceil( Math.abs(document.getElementById("chapter_5").clientHeight) / inner_Height ) + columnsZoom;
+    pages_chapter_6 = Math.ceil( Math.abs(document.getElementById("chapter_6").clientHeight) / inner_Height ) + columnsZoom;
+    pages_chapter_7 = Math.ceil( Math.abs(document.getElementById("chapter_7").clientHeight) / inner_Height ) + columnsZoom;
+    pages_chapter_8 = Math.ceil( Math.abs(document.getElementById("chapter_8").clientHeight) / inner_Height ) + columnsZoom;
+    pages_chapter_9 = Math.ceil( Math.abs(document.getElementById("chapter_9").clientHeight) / inner_Height ) + columnsZoom;
+    pages_chapter_10 = Math.ceil( Math.abs(document.getElementById("chapter_10").clientHeight) / inner_Height ) + columnsZoom;
+    pages_chapter_11 = Math.ceil( Math.abs(document.getElementById("chapter_11").clientHeight) / inner_Height ) + columnsZoom;
+    pages_chapter_12 = Math.ceil( Math.abs(document.getElementById("chapter_12").clientHeight) / inner_Height ) + columnsZoom;
+    pages_chapter_13 = Math.ceil( Math.abs(document.getElementById("chapter_13").clientHeight) / inner_Height ) + columnsZoom;
+    pages_chapter_14 = Math.ceil( Math.abs(document.getElementById("chapter_14").clientHeight) / inner_Height ) + columnsZoom;
+    pages_chapter_15 = Math.ceil( Math.abs(document.getElementById("chapter_15").clientHeight) / inner_Height ) + columnsZoom;
+    pages_chapter_16 = Math.ceil( Math.abs(document.getElementById("chapter_16").clientHeight) / inner_Height ) + columnsZoom;
+    pages_chapter_17 = Math.ceil( Math.abs(document.getElementById("chapter_17").clientHeight) / inner_Height ) + columnsZoom;
+    pages_chapter_18 = Math.ceil( Math.abs(document.getElementById("chapter_18").clientHeight) / inner_Height ) + columnsZoom;
+    pages_chapter_19 = Math.ceil( Math.abs(document.getElementById("chapter_19").clientHeight) / inner_Height ) + columnsZoom;
+    pages_chapter_20 = Math.ceil( Math.abs(document.getElementById("chapter_20").clientHeight) / inner_Height ) + columnsZoom;
+    pages_chapter_21 = Math.ceil( Math.abs(document.getElementById("chapter_21").clientHeight) / inner_Height ) + columnsZoom;
+    pages_chapter_22 = Math.ceil( Math.abs(document.getElementById("chapter_22").clientHeight) / inner_Height ) + columnsZoom;
+    pages_chapter_23 = Math.ceil( Math.abs(document.getElementById("chapter_23").clientHeight) / inner_Height ) + columnsZoom;
 
     span_1 = Math.abs(pages_chapter_1 * pgwidth);
     span_2 = Math.abs(pages_chapter_2 * pgwidth);
@@ -482,6 +500,7 @@ function start() {
 
     pageTot_SUM =  Math.floor( (chaptersSUM / pgwidth)  )
     
+    /*
     console.log(" - - - - - - - - PAGES CHAPTER");
     console.log("pages_chapter_1: " + pages_chapter_1);
     console.log("pages_chapter_2: " + pages_chapter_2);
@@ -537,7 +556,7 @@ function start() {
     
     console.log("Pages by SUM: " + pageTot_SUM);
     console.log(" - - - - - - - - * - - - - - - - - ");
-    
+    */
 
     var scroller = document.getElementById("content");  
     
@@ -546,14 +565,20 @@ function start() {
 
         pageCur = 1;
         pageTot =  pageTot_SUM;
-        console.log("pageTot: " + pageTot);
 
         pagina = $("#content"),
         pgwidth = pagina.width(),
         areaWidth = pgwidth,
 
-        console.log("pgwidth: " + pgwidth);
-        console.log("areaWidth: " + areaWidth);
+
+        console.log(    '\n', "- - - - - - - - - - - -", 
+                        '\n', "START",
+                        '\n', "- - - - - - - - - - - -",
+                        '\n', "pageTot: " + pageTot,
+                        '\n', "pgwidth: " + pgwidth, 
+                        '\n', "areaWidth: " + areaWidth,
+                        '\n', "columnsZoom: " + columnsZoom),
+                        '\n', " ";
 
         getPositionDom(), renderInfoPage();
   }, 1000)
@@ -661,3 +686,77 @@ window.onkeydown = function(event) {
     prev()
   };
 };
+
+
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* - - - - - - - - LAUNCH START FUNCTION - - - - - - - - */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+/*
+window.onkeydown = function(event) {
+  if (event.key == "Control") {
+    controlPress = 1;
+  } else if (event.key == "Meta") {
+    commandPress = 1;
+    console.log("Command Pressed "  + commandPress);
+  } else if (event.key == "+") {
+    if (plusPress == 0) {
+      plusPress = 1;
+      console.log("Plus Pressed " + plusPress);
+    };
+  } else if (event.key == "-") {
+    minusPress = 1;
+  };
+};
+
+window.onkeyup = function(event) {
+  if (event.key == "Control") {
+    controlPress = 0;
+  } else if (event.key == "Meta") {
+      commandPress = 0;
+      console.log("Command Unpressed: " + commandPress);
+  } else if (event.key == "+") {
+    plusPress = 0;
+    console.log("Plus Unpressed: " + plusPress);
+  } else if (event.key == "-") {
+    minusPress = 0;
+  };
+};
+
+
+    setTimeout(() => { 
+      commandPress = 0;
+      console.log("Command Unpressed: " + commandPress);
+    }, 200);
+
+
+
+window.addEventListener("keydown", (event) => {
+  if (commandPress == 1 ) {
+    if (plusPress == 1) {
+      columnsZoom = 2;
+      commandPress = 0;
+      plusPress = 0;
+      console.log(    '\n', "- - - - - - - - - - - -", 
+                      '\n', "Zoom In",
+                      '\n', "- - - - - - - - - - - -", 
+                      '\n', "columnsZoom: " + columnsZoom, 
+                      '\n', "commandPress: " + commandPress,
+                      '\n', "plusPress: " + plusPress),
+                      '\n', " ";
+    };
+  };
+});
+
+window.addEventListener("keydown", (event) => {
+  if (commandPress == 1 ) {
+    if (minusPress == 1) {
+      console.log("- - - - - - - - - - - - Zoom Out");
+      columnsZoom = 2;
+      console.log("columnsZoom: " + columnsZoom);
+      console.log("commandPress: " + commandPress);
+    };
+  };
+});
+*/

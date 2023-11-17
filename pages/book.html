@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>FRG - Serves You Right - Chapter 1</title>
+  <title>FRG - Serves You Right - Book</title>
   <meta content="width=device-width, initial-scale=1" name="viewport">
   
   <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
@@ -79,7 +79,7 @@
                   <h2 alt-text="Autora">Yehudit Mam</h2>
                 </article>
     
-                <div class="flex-column" style="height: 100%; overflow: scroll;">
+                <div class="flex-column">
                   <article class="credits_info">
                     <p class="credits_text">Published by:</p>
                     <p class="credits_text">Editorial Ferragosto, S.L.</p>
@@ -109,7 +109,10 @@
                   </article>  
                 </div>
               </div>  
-              <div class="flex-column flex-end">
+              <div class="flex-column flex-space_between">
+                <div id="item_botones">
+                  <a id="back" class="btn" onclick="showCredits()">Contents</a>
+                </div>
                 <h3>For Aarón and Anita Mam.</h3>  
               </div>
         </section>
@@ -117,8 +120,7 @@
         <section class="grid_items grid_item_06"></section>
         
         <section class="grid_items grid_item_07"></section>
-        <section class="grid_items grid_item_08" id="item_botones">
-          <a id="back" class="btn" onclick="showCredits()">Contents</a>
+        <section class="grid_items grid_item_08">
           
         </section>
         <section class="grid_items grid_item_09">
@@ -276,10 +278,6 @@
               <div class="index_row">
                 <a class="index_card" onclick="scrollChapter_23(this), showIndex(), pagesMove()" data-href="#chapter_23">
                   <p class="card_text"><strong>Twenty-three </strong>The sober three-thousand-dollar</p>
-                  <div class="card_shadow"></div>
-                </a>
-                <a class="index_card" onclick="scrollChapter_last(this), showIndex(), pagesMove()" data-href="#chapter_last">
-                  <p class="card_text"><strong>THE </strong>END</p>
                   <div class="card_shadow"></div>
                 </a>
               </div>
