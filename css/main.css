@@ -1440,7 +1440,8 @@ h1 strong {
         position: fixed;
         width: 100%;
         height: 80%;
-        z-index: 500
+        z-index: 500;
+        left: 0px;
     }
 
     #grid_interiores {

@@ -103,6 +103,50 @@ var controlPress,
 console.log("zoom: " + zoom);
 
 
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* - - - - - - -  Swipe Detection Mobile - - - - - - - - */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+var swipedir;
+function swipedetect(e, t) {
+  var n,
+      i,
+      d,
+      c = t || function (e) {};
+  document.addEventListener( "touchstart", function (e) {
+      var t = e.changedTouches[0];
+      (swipedir = "none"),
+        (dist = 0),
+        (n = t.pageX),
+        t.pageY,
+        (d = new Date().getTime());
+    },
+    !1
+  ),
+    document.addEventListener( "touchmove", function (e) {}, !1),
+    document.addEventListener( "touchend",  function (e) {
+        var t = e.changedTouches[0];
+        (i = t.pageX - n),
+          new Date().getTime() - d <= 300 &&
+          Math.abs(i) >= 80 &&
+          (swipedir = i < 0 ? "left" : "right"),
+          c(swipedir);
+    },!1
+  );
+}
+window.addEventListener( "load", function () {
+    var e = document.getElementById("touchsurface2");
+    document.getElementById("inner");
+    swipedetect(e, function (e) {
+      return "left" == e ? next() : "right" == e ? prev() : void 0;
+    });
+  },
+  !1
+);
+
+
+
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 /* - - - - - - - -  Show Chapters Notes  - - - - - - - - */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -498,6 +542,9 @@ function start() {
     var css_chapter_22 = Math.abs(document.getElementById("chapter_22").setAttribute('style', 'width:' + span_22 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + pages_chapter_22 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + pages_chapter_22 + '; column-width: ' + pgwidth + 'px;' ));
     var css_chapter_23 = Math.abs(document.getElementById("chapter_23").setAttribute('style', 'width:' + span_23 + 'px;  height:' + inner_Height + 'px; -webkit-column-count: ' + pages_chapter_23 + '; -webkit-column-width: ' + pgwidth + 'px; column-count: ' + pages_chapter_23 + '; column-width: ' + pgwidth + 'px;' ));
 
+    var css_touchArea = Math.abs(document.getElementById("touch_area").setAttribute('style', 'height:' + inner_Height + 'px'));
+
+
     pageTot_SUM =  Math.floor( (chaptersSUM / pgwidth)  )
     
     /*
@@ -668,7 +715,7 @@ function removeStyleChapters() {
     var remove_chapter_22 = document.getElementById("chapter_22").removeAttribute("style");
     var remove_chapter_23 = document.getElementById("chapter_23").removeAttribute("style");
 
-
+    var remove_touchArea = document.getElementById("touch_area").removeAttribute("style");
 }
 
 
