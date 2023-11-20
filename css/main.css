@@ -762,6 +762,16 @@ h1 strong {
     z-index: 100;
 }
 
+#touch_area {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 80%;
+    z-index: 500;
+    left: 0px;    
+}
+
+
 #grid_index {
     display: grid;
     grid-template-columns: auto 80vw auto;
@@ -1436,14 +1446,6 @@ h1 strong {
         height: 104px
     }
 
-    #touch_area {
-        position: fixed;
-        width: 100%;
-        height: 80%;
-        z-index: 500;
-        left: 0px;
-    }
-
     #grid_interiores {
         display: block!important;
     }
@@ -1603,4 +1605,10 @@ h1 strong {
         --cap-mb: 64px
     }
 
+}
+
+@media only screen and (hover: none) and (pointer: coarse){    
+    #touch_area {
+        display: block;
+    }
 }
