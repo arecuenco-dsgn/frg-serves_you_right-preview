@@ -41,6 +41,7 @@ var lastPage,
     contentPos = document.getElementById("content").scrollLeft,
     onContentScroll = 0,
     inner_Height = Math.abs(document.getElementById("inner").clientHeight);
+
 var pages_chapter_1,
     pages_chapter_2,
     pages_chapter_3,
@@ -64,6 +65,7 @@ var pages_chapter_1,
     pages_chapter_21,
     pages_chapter_22,
     pages_chapter_23;
+
 var span_1,
     span_2,
     span_3,
@@ -98,7 +100,9 @@ var controlPress,
     zoomStep = 1,
     columnsZoom = 2;
 
+var togglePagesMove = 1;
 
+pagesMove
 
 console.log("zoom: " + zoom);
 
@@ -187,12 +191,12 @@ function scrollPages(min, max) {
     if (scrollSwicth == 1) {
       contentPos = document.getElementById("content").scrollLeft;
 
-      pageCalc = (contentPos / areaWidth) + 1;
+      pageCalc = (contentPos / pgwidth) + 1;
       
       
       const MIN = min ?? 1;
       const MAX = max ?? pageTot;
-      roundingCalc = Math.floor(pageCalc);
+      roundingCalc = Math.ceil(pageCalc);
       parsed = parseInt(roundingCalc);
       pageCur = Math.min(Math.max(parsed, MIN), MAX);
 
@@ -205,9 +209,9 @@ function scrollPages(min, max) {
                       '\n', " ";
 
       renderInfoPage();
-      document.getElementById("content").scrollLeft = (pageCur - 1) * pgwidth;
+      document.getElementById("content").scrollLeft = Math.ceil(pageCur * pgwidth) ;
     }
-  }, 400);
+  }, 1000);
 }
 
 
@@ -395,63 +399,74 @@ function hasContentAnimateQueue() {
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 function next() {
-    if (!hasContentAnimateQueue()) {
-        if (pageCur >= 1 && pageCur < pageTot_SUM ) {
-            var t = document.getElementById("content").scrollLeft = areaWidth * pageCur; 
-            var e = $("#content");
-                console.log(" - - - - - - - - NEXT - IF");
-                scrollSwicth = 0;
-                pageCur++,
+    if (togglePagesMove == 1) {
+        togglePagesMove = 0;
+        console.log("togglePagesMove: " + togglePagesMove);
+        if (!hasContentAnimateQueue()) {
+            if (pageCur >= 1 && pageCur < pageTot_SUM ) {
+                contentPos = document.getElementById("content").scrollLeft;
+                var t = document.getElementById("content").scrollLeft = pgwidth + contentPos; 
+                var e = $("#content");
+                    console.log(" - - - - - - - - NEXT - IF");
+                    scrollSwicth = 0;
+                    pageCur++,
+                    renderInfoPage();
+
+                    console.log("t: " + t);
+                    console.log("pageCur: " + pageCur);
+                    console.log(" - - - - - - - - NEXT - IF - END");
+
+                    setTimeout(() => { scrollSwicth = 1; console.log("scrollSwicth: " + scrollSwicth);}, 2000);
+
+            } else if (pageCur = pageTot_SUM) {
+                console.log(" - - - - - - - - NEXT - ELSE IF"); 
+                scrollSwicth = 0;   
+                var t = document.getElementById("content").scrollLeft = 0;
+                pageCur = 1;
                 renderInfoPage();
-                console.log("t: " + t);
-                console.log("pageCur: " + pageCur);
-                console.log(" - - - - - - - - NEXT - IF - END");
 
-                setTimeout(() => { scrollSwicth = 1; console.log("scrollSwicth: " + scrollSwicth);}, 2000);
-
-        } else if (pageCur = pageTot_SUM) {
-            console.log(" - - - - - - - - NEXT - ELSE IF"); 
-            scrollSwicth = 0;   
-            var t = document.getElementById("content").scrollLeft = 0;
-            pageCur = 1;
-            renderInfoPage();
-
-            setTimeout(() => { scrollSwicth = 1; console.log("scrollSwicth: " + scrollSwicth); }, 2000);
+                setTimeout(() => { scrollSwicth = 1; console.log("scrollSwicth: " + scrollSwicth); }, 2000);
+            }
         }
+        setTimeout(() => { togglePagesMove = 1; console.log("togglePagesMove: " + togglePagesMove); }, 600);
     }
 }
-
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 /* - - - - - - - - Button Previus Page - - - - - - - - - */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 function prev() {
-    if (!hasContentAnimateQueue()) {
-        if (pageCur > 1) { 
-            var t = document.getElementById("content").scrollLeft = (areaWidth * (pageCur - 2)); 
-            var e = $("#content");
-                console.log(" - - - - - - - - PREV - IF");
+    if (togglePagesMove == 1) {
+        togglePagesMove = 0;
+        if (!hasContentAnimateQueue()) {
+            if (pageCur > 1) { 
+                contentPos = document.getElementById("content").scrollLeft;
+                var t = document.getElementById("content").scrollLeft = contentPos - pgwidth; 
+                var e = $("#content");
+                    console.log(" - - - - - - - - PREV - IF");
+                    scrollSwicth = 0;
+                    pageCur--,
+                    renderInfoPage();
+
+                    console.log("t: " + t);
+                    console.log("pageCur: " + pageCur);
+                    console.log(" - - - - - - - - PREV - IF - END");
+
+                    setTimeout(() => { scrollSwicth = 1; console.log("scrollSwicth: " + scrollSwicth); }, 2000);
+            } else if (pageCur = 1) {
+                console.log(" - - - - - - - - PREV - ELSE IF");
                 scrollSwicth = 0;
-                pageCur--,
+                var t = document.getElementById("content").scrollLeft = pgwidth * pageTot_SUM;
+                pageCur = pageTot;
                 renderInfoPage();
-                console.log("t: " + t);
-                console.log("pageCur: " + pageCur);
-                console.log(" - - - - - - - - PREV - IF - END");
 
                 setTimeout(() => { scrollSwicth = 1; console.log("scrollSwicth: " + scrollSwicth); }, 2000);
-        } else if (pageCur = 1) {
-            console.log(" - - - - - - - - PREV - ELSE IF");
-            scrollSwicth = 0;
-            var t = document.getElementById("content").scrollLeft = areaWidth * pageTot_SUM;
-            pageCur = pageTot;
-            renderInfoPage();
-
-            setTimeout(() => { scrollSwicth = 1; console.log("scrollSwicth: " + scrollSwicth); }, 2000);
+            }
         }
-    } 
+        setTimeout(() => { togglePagesMove = 1; console.log("togglePagesMove: " + togglePagesMove); }, 600);
+    }
 }
-
 
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -547,7 +562,7 @@ function start() {
 
     pageTot_SUM =  Math.floor( (chaptersSUM / pgwidth)  )
     
-    /*
+   
     console.log(" - - - - - - - - PAGES CHAPTER");
     console.log("pages_chapter_1: " + pages_chapter_1);
     console.log("pages_chapter_2: " + pages_chapter_2);
@@ -603,7 +618,7 @@ function start() {
     
     console.log("Pages by SUM: " + pageTot_SUM);
     console.log(" - - - - - - - - * - - - - - - - - ");
-    */
+  
 
     var scroller = document.getElementById("content");  
     

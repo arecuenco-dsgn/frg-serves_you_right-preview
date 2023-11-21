@@ -1079,7 +1079,6 @@ h1 strong {
     position: relative;
 }
 #inner article {
-    min-width: max-content;
     display: block;
     column-gap: 0px;
     -webkit-column-gap: 0px;
