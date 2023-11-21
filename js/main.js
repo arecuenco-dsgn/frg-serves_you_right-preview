@@ -209,7 +209,7 @@ function scrollPages(min, max) {
                       '\n', " ";
 
       renderInfoPage();
-      document.getElementById("content").scrollLeft = Math.ceil(pageCur * pgwidth) ;
+      document.getElementById("content").scrollLeft = Math.ceil((pageCur-1) * pgwidth) ;
     }
   }, 1000);
 }
@@ -408,6 +408,7 @@ function next() {
                 var t = document.getElementById("content").scrollLeft = pgwidth + contentPos; 
                 var e = $("#content");
                     console.log(" - - - - - - - - NEXT - IF");
+                    console.log("contentPos: " + contentPos);
                     scrollSwicth = 0;
                     pageCur++,
                     renderInfoPage();
@@ -445,6 +446,7 @@ function prev() {
                 var t = document.getElementById("content").scrollLeft = contentPos - pgwidth; 
                 var e = $("#content");
                     console.log(" - - - - - - - - PREV - IF");
+                    console.log("contentPos: " + contentPos);
                     scrollSwicth = 0;
                     pageCur--,
                     renderInfoPage();

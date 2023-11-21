@@ -1064,7 +1064,7 @@ h1 strong {
     overflow-y: hidden;
     overflow-x: auto;
     scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x;
     scrollbar-color: var(--black) var(--white-soft);
 }
 
