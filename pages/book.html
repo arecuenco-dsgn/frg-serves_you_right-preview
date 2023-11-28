@@ -92,10 +92,11 @@
                   <article class="credits_info">
                     <p class="credits_text">© 2023 Yehudit Mam</p>
                     <p class="credits_text">© Editorial Ferragosto, S.L.</p>
-                    <p class="credits_text">NFT Edition: July 2023</p>
+                    <p class="credits_text">NFT Edition: December 2023</p>
                     <p class="credits_text">Concept: Yehudit Mam & Ismael Gómez</p>
                     <p class="credits_text">Art: Moxarra González</p>
                     <p class="credits_text">UX design and development: Álvaro Recuenco</p>
+                    <p class="credits_text">Smart contract development: Magic Powered</p>
                   </article>
     
                   <article class="credits_info">
@@ -2355,6 +2356,20 @@
     </section>
   </main>
 
+  <span id="smalScreenError">
+    <p>For the best experience, open the book in a larger window. <span id="errorModalOpen" onclick="showError()">More Info</span></p>
+  </span>
+  <section style="display:none;" id="errorModal">
+    <article id="errorModalBox">
+      <h4>Browser Window Size to Small</h4>
+      <p>To have the best experience with the book, you should open or resize the browser window to a bit larger.</p>
+      <p>If you are checking the review on Opensea. Please, click in the 3 dots (<b>···</b>) above, close to the share button, and open the link "View Website"</p>
+      <a id="errorModalClose"  onclick="showError()">Close</a>
+    </article>
+    <div id="errorModalBG" onclick="showError()">
+      <div id="errorModalBgFilter" class="bgcenternoise" ></div>
+    </div>
+  </section>
 
 
   

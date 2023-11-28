@@ -300,6 +300,29 @@ function resizingBookScreen() {
   });
 
 
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* - - - - - - - -  Show Error Message - - - - - - - - - */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+
+function showError() {
+  console.log("- - - - - - - -> ERROR MODAL");
+  setTimeout(() => {
+    var x = document.getElementById("errorModal");
+    if (x.style.display === "none") {
+      x.style.display = "flex";
+      setTimeout(() => {
+        x.style.opacity = "1";
+      }, 100);
+    } else {
+      x.style.opacity = "0";
+      setTimeout(() => {
+        x.style.display = "none";
+      }, 600);
+    }
+  }, 100)
+}
+
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 /* - - - - - - - - -  Show Index Page  - - - - - - - - - */
