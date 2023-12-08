@@ -3,14 +3,13 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 /*
 
-  - ⛔️ Move calculations out the start function
+  - ✅ - Move calculations out the start function
   - ✅ - For resizing function create a "delete inline style" function
   - ✅ - See if it's possible to delete the touch-swipr javascript
   - ✅ - Finetune Index Responsiveness (Scroll & Grid)
   - ✅ - Show "Adjusting" Screen when resizing the window
   - ✅ - Scroll on Index in Large Desktop
   - ✅ - Up to 175% zoom need more columns (Fix Solution to 2 cols)
-  - Create Index of functions
 
 
 */
@@ -775,75 +774,3 @@ window.onkeydown = function(event) {
 };
 
 
-
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-/* - - - - - - - - LAUNCH START FUNCTION - - - - - - - - */
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-
-/*
-window.onkeydown = function(event) {
-  if (event.key == "Control") {
-    controlPress = 1;
-  } else if (event.key == "Meta") {
-    commandPress = 1;
-    console.log("Command Pressed "  + commandPress);
-  } else if (event.key == "+") {
-    if (plusPress == 0) {
-      plusPress = 1;
-      console.log("Plus Pressed " + plusPress);
-    };
-  } else if (event.key == "-") {
-    minusPress = 1;
-  };
-};
-
-window.onkeyup = function(event) {
-  if (event.key == "Control") {
-    controlPress = 0;
-  } else if (event.key == "Meta") {
-      commandPress = 0;
-      console.log("Command Unpressed: " + commandPress);
-  } else if (event.key == "+") {
-    plusPress = 0;
-    console.log("Plus Unpressed: " + plusPress);
-  } else if (event.key == "-") {
-    minusPress = 0;
-  };
-};
-
-
-    setTimeout(() => { 
-      commandPress = 0;
-      console.log("Command Unpressed: " + commandPress);
-    }, 200);
-
-
-
-window.addEventListener("keydown", (event) => {
-  if (commandPress == 1 ) {
-    if (plusPress == 1) {
-      columnsZoom = 2;
-      commandPress = 0;
-      plusPress = 0;
-      console.log(    '\n', "- - - - - - - - - - - -", 
-                      '\n', "Zoom In",
-                      '\n', "- - - - - - - - - - - -", 
-                      '\n', "columnsZoom: " + columnsZoom, 
-                      '\n', "commandPress: " + commandPress,
-                      '\n', "plusPress: " + plusPress),
-                      '\n', " ";
-    };
-  };
-});
-
-window.addEventListener("keydown", (event) => {
-  if (commandPress == 1 ) {
-    if (minusPress == 1) {
-      console.log("- - - - - - - - - - - - Zoom Out");
-      columnsZoom = 2;
-      console.log("columnsZoom: " + columnsZoom);
-      console.log("commandPress: " + commandPress);
-    };
-  };
-});
-*/
